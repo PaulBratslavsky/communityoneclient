@@ -7,7 +7,6 @@ import Login from "./pages/login";
 const isAuthed = true;
 
 function PrivateRoute({ isAuthed, children, ...rest }) {
-  console.log(isAuthed, "is authed")
   return <Route {...rest} render={() => isAuthed ? children : <Redirect to="/login" />} />
 } 
 

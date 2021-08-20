@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
+import Home from "./pages/home";
+import Details from "./pages/details";
+import Login from "./pages/login";
+
+const isAuthed = true;
+
+function PrivateRoute({ isAuthed, children, ...rest }) {
+  console.log(isAuthed, "is authed")
+  return <Route {...rest} render={() => isAuthed ? children : <Redirect to="/login" />} />
+} 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/details">Project Detail</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
+      </nav>
+      routes will go here
+      <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <PrivateRoute path="/details" isAuthed={isAuthed}>
+            <Details />
+          </PrivateRoute>
+          <Route path="/login">
+            <Login />
+          </Route>
+        </Switch>
     </div>
   );
 }

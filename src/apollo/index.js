@@ -8,7 +8,7 @@ import {
 
 const cache = new InMemoryCache();
 const defaultOptions = { mutate: { errorPolicy: "all" } };
-const httpLink = new HttpLink({ uri: 'http://localhost:1337/graphql' })
+const httpLink = new HttpLink({ uri: process.env.REACT_APP_API_URL || 'https://communityoneapi.herokuapp.com/graphql' })
 
 export const client = new ApolloClient({ 
   cache,

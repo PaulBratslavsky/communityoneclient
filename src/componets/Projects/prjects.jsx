@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Row } from "react-bootstrap";
 import { ProjectCard } from "../ProjectCard/projectCard";

@@ -1,5 +1,4 @@
-import { Switch, Route, Link, Redirect } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/home";
 import Details from "./pages/details";
 import Login from "./pages/login";

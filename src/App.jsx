@@ -1,8 +1,11 @@
-import "./App.css";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
+import { Container } from "react-bootstrap";
 import Home from "./pages/home";
 import Details from "./pages/details";
 import Login from "./pages/login";
+
+import "./sass/index.scss"
+import TopNavigation from "./componets/TopNavigation/topNavigation";
 
 const isAuthed = true;
 
@@ -13,20 +16,7 @@ function PrivateRoute({ isAuthed, children, ...rest }) {
 function App() {
   return (
     <div className="App">
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/details">Project Detail</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
-      </nav>
-      routes will go here
+      <TopNavigation />
       <Switch>
           <Route exact path="/">
             <Home />

@@ -1,5 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
-import { Card, Col, Image } from "react-bootstrap";
+import { Card, Col, Image, Button } from "react-bootstrap";
+import { AiOutlineHeart } from "react-icons/ai"; //AiFillHeart,
+
 const GET_LIKE_BY_PROJECT_ID = gql`
   query GetLikeBtPortfolioID($projectID: ID!) {
     likes(where: { project: { id: $projectID } }) {
@@ -24,25 +26,31 @@ export function ProjectCard({ project }) {
   return (
     <Col key={project.id}>
       <Card className="card">
-        <Card.Img className="card-image" variant="top" src={project.featuredImage.formats.large.url} />
-        <Card.Body>
-          <Card.Title>{project.name}</Card.Title>
-          <Card.Text>{project.description} </Card.Text>
-        </Card.Body>
-        <footer className="p-3 d-flex justify-content-between">
-          <div>
+        <Card.Img
+          className="card-image"
+          variant="top"
+          src={project.featuredImage.formats.large.url}
+        />
+        <footer className="px-3 pt-3 d-flex justify-content-between">
+          <div className="d-flex justify-content-center align-items-center flex-column">
             <Image
               className="avatar"
               src={project.developer.avatarImage.url}
               roundedCircle
             />
-            <p>{`${firstName} ${lastName}`}</p>
+            <p className="m-0">{`${firstName} ${lastName[0]}`}</p>
           </div>
-          <div>
+          <div className="d-flex justify-content-center align-items-center flex-column-reverse">
             <span>Likes: {data.likes.length}</span>
-            <button onClick={handleLike}>Like</button>
+            <AiOutlineHeart className="heart-icon" onClick={handleLike}>Like</AiOutlineHeart>
           </div>
         </footer>
+        <Card.Body>
+          <Card.Title>{project.name}</Card.Title>
+          <Card.Text>{project.description} </Card.Text>
+          <Button variant="primary">Details</Button>
+        </Card.Body>
+        
       </Card>
     </Col>
   );

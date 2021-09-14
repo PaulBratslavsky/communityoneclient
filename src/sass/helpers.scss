@@ -4,6 +4,11 @@
   width: 55px;
 }
 
+.card {
+  border: none;
+  box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.73);
+}
+
 .card-image {
   height: 250px;
   object-fit: cover;

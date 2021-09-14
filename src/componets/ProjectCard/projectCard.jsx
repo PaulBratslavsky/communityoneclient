@@ -23,7 +23,7 @@ export function ProjectCard({ project }) {
 
   return (
     <Col key={project.id}>
-      <Card>
+      <Card className="card">
         <Card.Img className="card-image" variant="top" src={project.featuredImage.formats.large.url} />
         <Card.Body>
           <Card.Title>{project.name}</Card.Title>

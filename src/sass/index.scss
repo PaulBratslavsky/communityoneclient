@@ -1,6 +1,13 @@
-@import "~bootstrap/scss/bootstrap";
+$theme-colors: (
+  "primary": #2D46B9,
+  "dark": #2D46B9,
+  "light": #F8F8F8,
+  "danger": #F037A5,
+  "secondary": #F8F8F8,
+);
 
-.avatar {
-  height: 55px;
-  width: 55px;
-}
+@import "~bootstrap/scss/bootstrap";
+@import "./helpers.scss";
+@import "./login-page.scss";
+
+

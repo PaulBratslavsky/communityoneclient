@@ -32,7 +32,7 @@ export function Projects() {
   if (error) return <p>Error</p>;
 
   return (
-    <Row xs={1} md={3} className="g-4 py-4">
+    <Row xs={1} sm={1} md={2} lg={3} className="g-4 py-4">
       {data &&
         data.projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

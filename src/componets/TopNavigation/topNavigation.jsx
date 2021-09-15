@@ -1,26 +1,26 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import {LinkContainer} from 'react-router-bootstrap'
+import { LinkContainer } from "react-router-bootstrap";
 
 export default function TopNavigation() {
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Dev Hunt</Navbar.Brand>
+        <LinkContainer to="/" exact>
+          <Navbar.Brand>Dev Hunt</Navbar.Brand>
+        </LinkContainer>
         <Nav className="me-auto">
-          <LinkContainer to="/">
-            <Nav.Link >Home</Nav.Link>
+          <LinkContainer to="/" exact>
+            <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/details">
+          {/* <LinkContainer to="/details">
             <Nav.Link >Project Detail</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> */}
           <LinkContainer to="/login">
-            <Nav.Link >Login</Nav.Link>
+            <Nav.Link>Login</Nav.Link>
           </LinkContainer>
-          
         </Nav>
       </Container>
     </Navbar>
   );
 }
-

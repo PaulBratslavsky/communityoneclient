@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
+import { useApolloClient } from "@apollo/client";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../../context/UserContext";
-import { useApolloClient } from "@apollo/client";
 
 export default function TopNavigation() {
-  const { user, setUser } = useContext(UserContext);
   const client = useApolloClient();
+  const { user, setUser } = useContext(UserContext);
 
   function handleLogout() {
     localStorage.clear();
@@ -26,7 +26,7 @@ export default function TopNavigation() {
           </LinkContainer>
           <LinkContainer to="/details">
             <Nav.Link >Project Detail</Nav.Link>
-          </LinkContainer>
+          </LinkContainer> 
           {!user && (
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
@@ -34,7 +34,7 @@ export default function TopNavigation() {
           )}
         </Nav>
         {user && (
-          <Button varient="ouline-secondary" size="sm" onClick={handleLogout}>
+          <Button variant="outline-secondary" size="sm" onClick={handleLogout}>
             Logout
           </Button>
         )}

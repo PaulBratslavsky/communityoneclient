@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
-import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { Redirect } from "react-router";
 import { UserContext } from "../../context/UserContext";
 
@@ -20,12 +21,11 @@ const INITIAL_FORM_STATE = { email: "", password: "" };
 
 
 export default function LoginForm() {
-  const { user, setUser } = useContext(UserContext)
-
+  const { user, setUser } = useContext(UserContext);
   const [LoginMutation, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       const { login } = data;
-      setUser({ token: login.jwt, userID: login.user.id})
+      setUser({ token: login.jwt, userID: login.user.id });
     },
   });
   const [input, setInput] = useState(INITIAL_FORM_STATE);
@@ -45,14 +45,14 @@ export default function LoginForm() {
           },
         },
       });
+      setInput(INITIAL_FORM_STATE);
     } else {
       alert("Please complete all the fields");
     }
   }
 
-  if (loading) return <Spinner aniamtion="grow" />;
-  if (error) return <h1>ARRGGHH !</h1>;
-  if (user) return <Redirect to="/" />
+  if (loading) return <Spinner animation="grow" variant="primary" />;
+  if (user) return <Redirect to="/" />;
 
   return (
     <Container>
@@ -85,6 +85,7 @@ export default function LoginForm() {
               Sign In
             </Button>
           </Form>
+          {error && <h4>Server Error: {error.message}</h4>}
         </Col>
       </Row>
     </Container>

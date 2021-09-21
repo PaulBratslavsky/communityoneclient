@@ -1,4 +1,3 @@
-
 import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./pages/home";
@@ -10,13 +9,13 @@ import "./sass/index.scss"
 import TopNavigation from "./componets/TopNavigation/topNavigation";
 
 
-
 function PrivateRoute({ isAuthed, children, ...rest }) {
   return <Route {...rest} render={() => isAuthed ? children : <Redirect to="/login" />} />
 } 
 
 function App() {
   const { user } = useContext(UserContext);
+  console.log(user);
   return (
     <div className="App">
       <TopNavigation />

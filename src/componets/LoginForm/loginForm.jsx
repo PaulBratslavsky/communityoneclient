@@ -1,9 +1,33 @@
-import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Redirect } from "react-router";
+import { UserContext } from "../../context/UserContext";
+
+const LOGIN_USER = gql`
+  mutation LoginMutation($input: UsersPermissionsLoginInput!) {
+    login(input: $input) {
+      jwt
+      user {
+        username
+        id
+      }
+    }
+  }
+`;
 
 const INITIAL_FORM_STATE = { email: "", password: "" };
 
+
 export default function LoginForm() {
+  const { user, setUser } = useContext(UserContext)
+
+  const [LoginMutation, { error, loading }] = useMutation(LOGIN_USER, {
+    onCompleted: (data) => {
+      const { login } = data;
+      setUser({ token: login.jwt, userID: login.user.id})
+    },
+  });
   const [input, setInput] = useState(INITIAL_FORM_STATE);
 
   function handleInputChange(event) {
@@ -11,16 +35,25 @@ export default function LoginForm() {
   }
 
   function handleFormSubmit(event) {
-    event.preventDefault()
-    console.log(input)
-
+    event.preventDefault();
     if (input.password !== "" && input.email !== "") {
-      alert("Form submitted!")
+      LoginMutation({
+        variables: {
+          input: {
+            identifier: input.email,
+            password: input.password,
+          },
+        },
+      });
     } else {
-      alert("Please complete all the fields")
+      alert("Please complete all the fields");
     }
-    
   }
+
+  if (loading) return <Spinner aniamtion="grow" />;
+  if (error) return <h1>ARRGGHH !</h1>;
+  if (user) return <Redirect to="/" />
+
   return (
     <Container>
       <Row className="justify-content-md-center align-items-center text-white">

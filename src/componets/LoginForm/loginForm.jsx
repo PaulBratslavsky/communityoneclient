@@ -67,6 +67,7 @@ export default function LoginForm() {
                 name="email"
                 onChange={handleInputChange}
                 value={input.email}
+                className="border-0"
               />
             </Form.Group>
 
@@ -78,6 +79,7 @@ export default function LoginForm() {
                 name="password"
                 onChange={handleInputChange}
                 value={input.password}
+                className="border-0"
               />
             </Form.Group>
 

@@ -1,0 +1,23 @@
+.details {
+  // display: grid;
+  // height: 100%;
+  // grid-template-columns: 70% 30%;
+  // gap: 1rem;
+
+  display: grid;
+  height: 100%;
+  grid-template-columns: 70% 30%;
+  grid-template-rows: 55% 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+
+  .project-details {
+    grid-area: 1 / 1 / 3 / 2;
+  }
+  .user-details {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+  .message-area {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+}

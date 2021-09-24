@@ -18,7 +18,7 @@ function PrivateRoute({ isAuthed, children, ...rest }) {
 function App() {
   const { user } = useContext(UserContext);
   return (
-    <div className="App">
+    <div className="main">
       <TopNavigation />
       <Switch>
           <Route exact path="/">

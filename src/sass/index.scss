@@ -1,13 +1,18 @@
 $theme-colors: (
-  "primary": #2D46B9,
-  "dark": #2D46B9,
+  "primary": #8c4bff, //#2D46B9,
+  "dark": #242424,
   "light": #F8F8F8,
-  "danger": #F037A5,
+  "danger": #fd798c, //#F037A5,
   "secondary": #F8F8F8,
+  "warning": orange,
 );
 
 @import "~bootstrap/scss/bootstrap";
 @import "./helpers.scss";
 @import "./login-page.scss";
+@import "./details.scss";
 
+* {
+  box-sizing: border-box;
+}
 

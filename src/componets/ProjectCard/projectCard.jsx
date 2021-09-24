@@ -1,9 +1,10 @@
 import React, { useContext } from "react"
 import { gql, useQuery } from "@apollo/client";
-import { Card, Col, Image, Button } from "react-bootstrap";
+import { Card, Col, Button } from "react-bootstrap";
 import { AiOutlineHeart } from "react-icons/ai"; //AiFillHeart,
 import { UserContext } from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
+import Avatar from "../Avatar/avatar";
 
 const GET_LIKE_BY_PROJECT_ID = gql`
   query GetLikeBtPortfolioID($projectID: ID!) {
@@ -47,11 +48,7 @@ export function ProjectCard({ project }) {
         />
         <footer className="px-3 pt-3 d-flex justify-content-between">
           <div className="d-flex justify-content-center align-items-center flex-column">
-            <Image
-              className="avatar"
-              src={project.developer.avatarImage.url}
-              roundedCircle
-            />
+            <Avatar imgUrl={project.developer.avatarImage.url} />
             <p className="m-0">{`${firstName} ${lastName[0]}`}</p>
           </div>
           <div className="d-flex justify-content-center align-items-center flex-column-reverse">
@@ -61,7 +58,7 @@ export function ProjectCard({ project }) {
         </footer>
         <Card.Body>
           <Card.Title>{project.name}</Card.Title>
-          <Card.Text>{project.description} </Card.Text>
+          <Card.Text>{project.description.slice(0,144)}... </Card.Text>
           <Button variant="primary" onClick={() => handleDetailRedirect(project.id)}>Details</Button>
         </Card.Body>
         

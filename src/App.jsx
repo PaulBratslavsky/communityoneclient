@@ -24,11 +24,14 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <PrivateRoute path="/details" isAuthed={user}>
+          <PrivateRoute path="/details/:projectID" isAuthed={user}>
             <Details />
           </PrivateRoute>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="*">
+            <h1>Create 404 Page here</h1>
           </Route>
         </Switch>
     </div>

@@ -1,6 +1,9 @@
+import React, { useContext } from "react"
 import { gql, useQuery } from "@apollo/client";
 import { Card, Col, Image, Button } from "react-bootstrap";
 import { AiOutlineHeart } from "react-icons/ai"; //AiFillHeart,
+import { UserContext } from "../../context/UserContext";
+import { useHistory } from "react-router-dom";
 
 const GET_LIKE_BY_PROJECT_ID = gql`
   query GetLikeBtPortfolioID($projectID: ID!) {
@@ -11,11 +14,22 @@ const GET_LIKE_BY_PROJECT_ID = gql`
 `;
 
 export function ProjectCard({ project }) {
+  const { user } = useContext(UserContext);
+  const history = useHistory()
   const { firstName, lastName } = project.developer;
 
   function handleLike() {
-    console.log("liked button clicked");
+    if (!user) history.push("/login")
+    else {
+      alert("Handle like")
+    }
   }
+
+  function handleDetailRedirect(projectID) {
+    if (!user) history.push("/login")
+    else history.push(`/details/${projectID}`)
+  }
+
   const { error, data, loading } = useQuery(GET_LIKE_BY_PROJECT_ID, {
     variables: { projectID: project.id },
   });
@@ -48,7 +62,7 @@ export function ProjectCard({ project }) {
         <Card.Body>
           <Card.Title>{project.name}</Card.Title>
           <Card.Text>{project.description} </Card.Text>
-          <Button variant="primary">Details</Button>
+          <Button variant="primary" onClick={() => handleDetailRedirect(project.id)}>Details</Button>
         </Card.Body>
         
       </Card>

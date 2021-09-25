@@ -10,14 +10,14 @@ export default function Details() {
   return (
     <Container>
       <div className="details">
-          <div class="project-details bg-secondary shadow my-3 rounded p-3">
+          <div className="project-details bg-secondary shadow my-3 rounded p-3">
             <header>
               <h1>Details Page Private for blog with id {projectID}</h1>
               <BackButton />
             </header>
           </div>
 
-          <div class="user-details bg-primary shadow mt-3 rounded p-3">
+          <div className="user-details bg-primary shadow mt-3 rounded p-3">
             <div className="d-flex justify-content-center align-items-center p-2">
               <Avatar
                 size={175}

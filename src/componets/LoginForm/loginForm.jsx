@@ -24,8 +24,10 @@ export default function LoginForm() {
 
   const [LoginMutation, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
-      const { login } = data;
-      setUser({ token: login.jwt, userID: login.user.id})
+      if (data) {
+        const { login } = data;
+        setUser({ token: login.jwt, userID: login.user.id})
+      }
     },
   });
   const [input, setInput] = useState(INITIAL_FORM_STATE);

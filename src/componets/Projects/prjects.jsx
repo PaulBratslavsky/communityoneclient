@@ -1,32 +1,11 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Row } from "react-bootstrap";
 import { ProjectCard } from "../ProjectCard/projectCard";
+import { PROJECTS_QUERY } from "../../apollo/queries/projectsQuery";
 
-const GET_PROJECTS_QUERY = gql`
-  query GetAllProjects {
-    projects {
-      id
-      name
-      description
-      likesCount
-      developer {
-        id
-        firstName
-        lastName
-        avatarImage {
-          url
-        }
-      }
-      featuredImage {
-        formats
-      }
-      published_at
-    }
-  }
-`;
 
 export function Projects() {
-  const { error, data, loading } = useQuery(GET_PROJECTS_QUERY);
+  const { error, data, loading } = useQuery(PROJECTS_QUERY);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;

@@ -24,8 +24,10 @@ export default function LoginForm() {
 
   const [LoginMutation, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
-      const { login } = data;
-      setUser({ token: login.jwt, userID: login.user.id})
+      if (data) {
+        const { login } = data;
+        setUser({ token: login.jwt, userID: login.user.id})
+      }
     },
   });
   const [input, setInput] = useState(INITIAL_FORM_STATE);
@@ -67,6 +69,7 @@ export default function LoginForm() {
                 name="email"
                 onChange={handleInputChange}
                 value={input.email}
+                className="border-0"
               />
             </Form.Group>
 
@@ -78,6 +81,7 @@ export default function LoginForm() {
                 name="password"
                 onChange={handleInputChange}
                 value={input.password}
+                className="border-0"
               />
             </Form.Group>
 

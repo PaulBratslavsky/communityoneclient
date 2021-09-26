@@ -7,6 +7,8 @@ $theme-colors: (
   "warning": orange,
 );
 
+// #2B2A82
+
 @import "~bootstrap/scss/bootstrap";
 @import "./helpers.scss";
 @import "./login-page.scss";

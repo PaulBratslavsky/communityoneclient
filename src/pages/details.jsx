@@ -28,7 +28,7 @@ export default function Details() {
               />
               
             </div>
-            <ProjectLikes projectID={1}/>
+            <ProjectLikes projectID={projectID}/>
           </div>
           <div className="message-area bg-dark text-white shadow rounded mb-3 p-3">messages</div>
           </div>

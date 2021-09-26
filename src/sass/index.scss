@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 $theme-colors: (
   "primary": #8c4bff, //#2D46B9,
   "dark": #242424,
@@ -6,6 +8,8 @@ $theme-colors: (
   "secondary": #F8F8F8,
   "warning": orange,
 );
+
+$font-family-base: 'Roboto', sans-serif;
 
 // #2B2A82
 

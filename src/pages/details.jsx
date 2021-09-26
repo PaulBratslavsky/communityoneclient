@@ -85,6 +85,7 @@ export default function Details() {
               imgUrl={avatarImage.url}
               firstName={firstName}
               lastName={lastName}
+              className="text-dark"
               showName
             />
            

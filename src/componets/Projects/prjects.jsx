@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Row } from "react-bootstrap";
+import { Row, Spinner } from "react-bootstrap";
 import { ProjectCard } from "../ProjectCard/projectCard";
 import { PROJECTS_QUERY } from "../../apollo/queries/projectsQuery";
 
@@ -7,7 +7,7 @@ import { PROJECTS_QUERY } from "../../apollo/queries/projectsQuery";
 export function Projects() {
   const { error, data, loading } = useQuery(PROJECTS_QUERY);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Spinner aniamtion="grow" />;
   if (error) return <p>Error</p>;
 
   return (

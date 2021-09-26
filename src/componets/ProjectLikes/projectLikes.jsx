@@ -3,6 +3,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { UserContext } from "../../context/UserContext";
 import { useHistory } from "react-router-dom";
+import classNames from "classnames";
 
 const GET_LIKE_BY_PROJECT_ID = gql`
   query GetLikeBtPortfolioID($projectID: ID!) {
@@ -28,7 +29,7 @@ const LIKE_MUTATION = gql`
   }
 `;
 
-export default function ProjectLikes({ projectID }) {
+export default function ProjectLikes({ projectID, className }) {
   const { user } = useContext(UserContext);
   const history = useHistory();
 
@@ -46,7 +47,6 @@ export default function ProjectLikes({ projectID }) {
   function checkIfLikedPost(likes, userID = null) {
     if (null) return false;
     const result = likes.find((like) => like.user.id === userID);
-    console.log(result, "LIEKD POST");
     return result;
   }
 
@@ -70,17 +70,16 @@ export default function ProjectLikes({ projectID }) {
   if (error || likesError) return <p>Error</p>;
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column-reverse">
-      <span>Likes: {data.likes.length}</span>
+    <div className={classNames("d-flex justify-content-center align-items-center flex-column-reverse", className)}>
       {checkIfLikedPost(data.likes, user?.userID) ? (
-        <AiFillHeart className="heart-icon" onClick={handleLike}>
-          Like
-        </AiFillHeart>
+        <AiFillHeart className="heart-icon text-primary fs-1" onClick={handleLike} />
+       
       ) : (
-        <AiOutlineHeart className="heart-icon" onClick={handleLike}>
-          Like
-        </AiOutlineHeart>
+        <AiOutlineHeart className="heart-icon text-dark fs-1" onClick={handleLike} />
+   
       )}
+            <span className="text-dark fw-bold">{data.likes.length}</span>
+
     </div>
   );
 }

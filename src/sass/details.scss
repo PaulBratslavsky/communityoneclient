@@ -11,8 +11,11 @@
   grid-column-gap: 16px;
   grid-row-gap: 16px;
 
+  .project-header {
+    grid-area: 1 / 1 / 2 / 2;
+  }
   .project-details {
-    grid-area: 1 / 1 / 3 / 2;
+    grid-area: 2 / 1 / 3 / 2;
   }
   .user-details {
     grid-area: 1 / 2 / 2 / 3;

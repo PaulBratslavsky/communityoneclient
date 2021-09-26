@@ -28,7 +28,6 @@ export function ProjectCard({ project }) {
             imgUrl={project.developer.avatarImage.url}
             firstName={firstName}
             lastName={lastName}
-            showName
           />
 
           <ProjectLikes projectID={project.id} />

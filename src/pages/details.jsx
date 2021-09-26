@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Button, Container, Image, Spinner } from "react-bootstrap";
+import { Container, Image, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Avatar from "../componets/Avatar/avatar";
 import BackButton from "../componets/BackButton";

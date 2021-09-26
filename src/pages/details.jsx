@@ -3,7 +3,7 @@ import { Container, Image, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Avatar from "../componets/Avatar/avatar";
 import BackButton from "../componets/BackButton";
-// import ProjectLikes from "../componets/ProjectLikes/projectLikes";
+import ProjectLikes from "../componets/ProjectLikes/projectLikes";
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from "react-icons/ai";
 import { CgWebsite } from "react-icons/cg"
 import { IoDocumentText } from "react-icons/io5"
@@ -96,7 +96,7 @@ export default function Details() {
               {website && <a href={website} target="_blank" rel="noreferrer" className="text-dark display-6"><CgWebsite /></a>}
               {resume && <a href={resume} target="_blank" rel="noreferrer" className="text-dark display-6"><IoDocumentText /></a>}
             </div>
-          {/* <ProjectLikes projectID={projectID} /> */}
+          <ProjectLikes projectID={projectID} />
           {/* <ul>
             <li>Projects: 3</li>
             <li>Likes: 12</li>

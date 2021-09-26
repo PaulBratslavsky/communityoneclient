@@ -72,7 +72,7 @@ export default function ProjectLikes({ projectID, className }) {
   return (
     <div className={classNames("d-flex justify-content-center align-items-center flex-column-reverse", className)}>
       {checkIfLikedPost(data.likes, user?.userID) ? (
-        <AiFillHeart className="heart-icon text-primary fs-1" onClick={handleLike} />
+        <AiFillHeart className="heart-icon text-dark fs-1" onClick={handleLike} />
        
       ) : (
         <AiOutlineHeart className="heart-icon text-dark fs-1" onClick={handleLike} />

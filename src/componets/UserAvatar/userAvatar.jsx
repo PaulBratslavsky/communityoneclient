@@ -17,14 +17,20 @@ const USER_QUERY = gql`
 `;
 
 export default function UserAvatar({ size = 75, className }) {
-  const styles = { height: `${size}px`, width: `${size}px` };
-  const [ getAvatar, { data, loading }] = useLazyQuery(USER_QUERY)
+
+  const styles = {
+    height: `${size}px`,
+    width: `${size}px`,
+    objectFit: "cover",
+  };
+  
+  const [getAvatar, { data, loading }] = useLazyQuery(USER_QUERY);
   useEffect(() => {
-      getAvatar()
-  }, [getAvatar])
+    getAvatar();
+  }, [getAvatar]);
 
   if (loading) return <Spinner aniamtion="grow" />;
-    if (!data) return null;
+  if (!data) return null;
 
   const { firstName, avatarImage: url } = data.currentUser;
   return (

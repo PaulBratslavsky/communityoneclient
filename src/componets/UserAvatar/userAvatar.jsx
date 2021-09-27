@@ -18,9 +18,7 @@ const USER_QUERY = gql`
 
 export default function UserAvatar({ size = 75, className }) {
   const styles = { height: `${size}px`, width: `${size}px` };
-  const [ getAvatar, { data, loading }] = useLazyQuery(USER_QUERY, {
-      fetchPolicy: "network-only"
-  })
+  const [ getAvatar, { data, loading }] = useLazyQuery(USER_QUERY)
   useEffect(() => {
       getAvatar()
   }, [getAvatar])

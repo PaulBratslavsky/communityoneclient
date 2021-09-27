@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import { useApolloClient } from "@apollo/client";
+import UserAvatar from "../UserAvatar/userAvatar";
 
 export default function TopNavigation() {
   const { user, setUser } = useContext(UserContext);
@@ -31,9 +32,12 @@ export default function TopNavigation() {
           )}
         </Nav>
         {user && (
+          <div className="d-flex">
+          <UserAvatar size={30} />
           <Button varient="ouline-secondary" size="sm" onClick={handleLogout}>
             Logout
           </Button>
+          </div>
         )}
       </Container>
     </Navbar>

@@ -1,12 +1,12 @@
 import { gql, useQuery } from "@apollo/client";
-import { Container, Image, Spinner } from "react-bootstrap";
+import { Container, Image, Spinner, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Avatar from "../componets/Avatar/avatar";
 import BackButton from "../componets/BackButton";
-import ProjectLikes from "../componets/ProjectLikes/projectLikes";
+// import ProjectLikes from "../componets/ProjectLikes/projectLikes";
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg"
-import { IoDocumentText } from "react-icons/io5"
+import { CgWebsite } from "react-icons/cg";
+import { IoDocumentText } from "react-icons/io5";
 
 const GET_PROJECT = gql`
   query SingleProjectQuerry($id: ID!) {
@@ -15,6 +15,8 @@ const GET_PROJECT = gql`
       featuredImage {
         url
       }
+      gitUrl
+      siteUrl
       name
       description
       developer {
@@ -46,6 +48,8 @@ export default function Details() {
     name,
     description,
     featuredImage,
+    gitUrl,
+    siteUrl,
     developer: {
       firstName,
       lastName,
@@ -68,7 +72,7 @@ export default function Details() {
             style={{ height: "100%", width: "100%", objectFit: "cover" }}
           />
         </div>
-        <div className="project-details bg-secondary  rounded p-3 mb-3">
+        <div className="project-details bg-light rounded p-3 mb-3">
           <div>
             <header>
               <h1>{name}</h1>
@@ -78,32 +82,91 @@ export default function Details() {
           </div>
         </div>
 
-        <div className="user-details bg-primary  mt-3 rounded p-3">
+        <div className="user-details bg-dark mt-3 rounded p-3">
           <div className="d-flex justify-content-center align-items-center mt-3">
             <Avatar
               size={175}
               imgUrl={avatarImage.url}
               firstName={firstName}
               lastName={lastName}
-              className="text-dark"
+              className="text-secondary fs-3"
               showName
             />
-           
           </div>
           <div className="d-flex justify-content-evenly align-items-center w-100">
-              {gitHub && <a href={gitHub} target="_blank" rel="noreferrer" className="text-dark display-6"><AiFillGithub /></a>}
-              {linkedIn && <a href={linkedIn} target="_blank" rel="noreferrer" className="text-dark display-6"><AiFillLinkedin /></a>}
-              {youTube && <a href={youTube} target="_blank" rel="noreferrer" className="text-dark display-6"><AiFillYoutube /></a>}
-              {website && <a href={website} target="_blank" rel="noreferrer" className="text-dark display-6"><CgWebsite /></a>}
-              {resume && <a href={resume} target="_blank" rel="noreferrer" className="text-dark display-6"><IoDocumentText /></a>}
-            </div>
-          <ProjectLikes projectID={projectID} />
-          {/* <ul>
-            <li>Projects: 3</li>
-            <li>Likes: 12</li>
-            <li>Comments: 55</li>
-            <li>Favorites: 55</li>
-          </ul> */}
+            {gitHub && (
+              <a
+                href={gitHub}
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary display-6"
+              >
+                <AiFillGithub />
+              </a>
+            )}
+            {linkedIn && (
+              <a
+                href={linkedIn}
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary display-6"
+              >
+                <AiFillLinkedin />
+              </a>
+            )}
+            {youTube && (
+              <a
+                href={youTube}
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary display-6"
+              >
+                <AiFillYoutube />
+              </a>
+            )}
+            {website && (
+              <a
+                href={website}
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary display-6"
+              >
+                <CgWebsite />
+              </a>
+            )}
+            {resume && (
+              <a
+                href={resume}
+                target="_blank"
+                rel="noreferrer"
+                className="text-secondary display-6"
+              >
+                <IoDocumentText />
+              </a>
+            )}
+          </div>
+          <div className="d-grid gap-2 mx-2 mt-4">
+            {siteUrl && (
+              <Button
+                variant="primary"
+                size="lg"
+                href={siteUrl}
+                target="_blank"
+              >
+                Live Demo
+              </Button>
+            )}
+            {gitUrl && (
+              <Button
+                variant="secondary"
+                size="lg"
+                href={gitUrl}
+                target="_blank"
+              >
+                GitHub
+              </Button>
+            )}
+          </div>
         </div>
         <div className="message-area bg-dark text-white rounded mb-3 p-3">
           messages

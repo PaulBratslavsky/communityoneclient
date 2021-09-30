@@ -1,12 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
-import { Container, Image, Spinner, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import Avatar from "../componets/Avatar/avatar";
-import BackButton from "../componets/BackButton";
+import { gql, useQuery } from '@apollo/client';
+import { Container, Image, Spinner, Button } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import Avatar from '../componets/Avatar/avatar';
+import BackButton from '../componets/BackButton';
 // import ProjectLikes from "../componets/ProjectLikes/projectLikes";
-import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from "react-icons/ai";
-import { CgWebsite } from "react-icons/cg";
-import { IoDocumentText } from "react-icons/io5";
+import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
+import { CgWebsite } from 'react-icons/cg';
+import { IoDocumentText } from 'react-icons/io5';
 
 const GET_PROJECT = gql`
   query SingleProjectQuerry($id: ID!) {
@@ -66,11 +66,13 @@ export default function Details() {
     <Container>
       <div className="details">
         <div className="project-header bg-secondary  mt-3 rounded overflow-hidden bg-primary">
-          <Image
-            src={featuredImage.url}
-            alt="name"
-            style={{ height: "100%", width: "100%", objectFit: "cover" }}
-          />
+          {featuredImage && (
+            <Image
+              src={featuredImage.url}
+              alt="name"
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            />
+          )}
         </div>
         <div className="project-details bg-light rounded p-3 mb-3">
           <div>
@@ -78,7 +80,9 @@ export default function Details() {
               <h1>{name}</h1>
             </header>
             <p>{description}</p>
-            <BackButton className="float-end" />
+            <div className="d-flex justify-content-end">
+              <BackButton />
+            </div>
           </div>
         </div>
 

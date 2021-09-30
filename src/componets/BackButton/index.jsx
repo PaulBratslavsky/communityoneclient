@@ -5,7 +5,7 @@ export default function BackButton() {
 const route = useHistory();
 
     return (
-        <Button variant="primary" size="sm" onClick={() => route.goBack()}>
+        <Button variant="primary" size="md" onClick={() => route.goBack()}>
             Back
         </Button>
     )

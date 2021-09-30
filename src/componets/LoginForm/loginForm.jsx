@@ -3,6 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import { Redirect } from "react-router";
 import { UserContext } from "../../context/UserContext";
+import BackButton from '../BackButton';
 
 const LOGIN_USER = gql`
   mutation LoginMutation($input: UsersPermissionsLoginInput!) {
@@ -85,9 +86,10 @@ export default function LoginForm() {
               />
             </Form.Group>
 
-            <Button variant="outline-secondary" type="submit">
+            <Button variant="outline-secondary" type="submit" className="me-2">
               Sign In
             </Button>
+            <BackButton />
           </Form>
         </Col>
       </Row>

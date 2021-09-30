@@ -1,34 +1,36 @@
-import React, { useContext } from "react";
-import { Card, Col, Button } from "react-bootstrap";
-import { UserContext } from "../../context/UserContext";
-import { useHistory } from "react-router-dom";
-import Avatar from "../Avatar/avatar";
-import ProjectLikes from "../ProjectLikes/projectLikes";
+import React, { useContext } from 'react';
+import { Card, Col, Button } from 'react-bootstrap';
+import { UserContext } from '../../context/UserContext';
+import { useHistory } from 'react-router-dom';
+import Avatar from '../Avatar/avatar';
+import ProjectLikes from '../ProjectLikes/projectLikes';
 
 export function ProjectCard({ project }) {
   const { user } = useContext(UserContext);
   const history = useHistory();
-  const { firstName, lastName } = project.developer;
 
   function handleDetailRedirect(projectID) {
-    if (!user) history.push("/login");
+    if (!user) history.push('/login');
     else history.push(`/details/${projectID}`);
   }
 
   return (
     <Col key={project.id}>
       <Card className="card">
-        <Card.Img
+      {project.featuredImage && <Card.Img
           className="card-image"
           variant="top"
           src={project.featuredImage.formats.large.url}
-        />
+        /> }
+        
         <footer className="px-3 pt-3 d-flex justify-content-between">
-          <Avatar
-            imgUrl={project.developer.avatarImage.url}
-            firstName={firstName}
-            lastName={lastName}
-          />
+          {project.developer && (
+            <Avatar
+              imgUrl={project.developer.avatarImage.url}
+              firstName={project.developer.firstName}
+              lastName={project.developer.lastName}
+            />
+          )}
 
           <ProjectLikes projectID={project.id} />
         </footer>

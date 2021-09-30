@@ -1,3 +1,5 @@
+import { createUploadLink } from 'apollo-upload-client';
+
 import {
   ApolloClient,
   HttpLink,
@@ -8,7 +10,7 @@ import {
 
 const cache = new InMemoryCache();
 const defaultOptions = { mutate: { errorPolicy: "all" } };
-const httpLink = new HttpLink({ uri: process.env.REACT_APP_API_URL || 'https://communityoneapi.herokuapp.com/graphql' })
+const httpLink = createUploadLink ({ uri: process.env.REACT_APP_API_URL || 'https://communityoneapi.herokuapp.com/graphql' })
 
 // export const client = new ApolloClient({ 
 //   cache,

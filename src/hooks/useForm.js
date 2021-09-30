@@ -7,7 +7,7 @@ export default function useForm(initial = {}) {
     let { name, value, type } = e.target;
 
     if (type === 'file') [value] = e.target.files;
-    console.log(name, value)
+
     setFields({
       ...fields, [name]: value
     });

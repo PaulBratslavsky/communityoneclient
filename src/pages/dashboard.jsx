@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Container, Button, Form } from 'react-bootstrap';
 import useForm from '../hooks/useForm';
 import { gql, useMutation } from '@apollo/client';
-
+import BackButton from '../componets/BackButton';
+import { useHistory } from 'react-router-dom'
+import { PROJECTS_QUERY } from '../apollo/queries/projectsQuery';
 const INITIAL_FORM_STATE = {
-  name: 'test',
-  description: 'test 2',
-  imageFile: '',
+  name: '',
+  description: '',
+  file: '',
 };
 
 const UPLOAD_FEATURED_IMAGE_MUTATION = gql`
@@ -40,31 +42,47 @@ const CREATE_PROJECT_MUTATION = gql`
 `;
 
 export default function Dashboard() {
+  const history = useHistory()
   const [loading, setLoading] = useState(false);
   const { fields, handleSetFields, resetFields } = useForm(INITIAL_FORM_STATE);
   const [createProject] = useMutation(CREATE_PROJECT_MUTATION);
-  const [upladImage] = useMutation(UPLOAD_FEATURED_IMAGE_MUTATION);
-  function handleSubmitForm(e) {
+  const [uploadImage] = useMutation(UPLOAD_FEATURED_IMAGE_MUTATION);
+  
+  async function handleSubmitForm(e) {
     e.preventDefault();
-    console.log(fields, 'submit this data');
-    const { name, description } = fields;
-    if (fields.imageFile) {
-      createProject({
+    const { name, description, file} = fields;
+
+    if (file) {
+      setLoading(true);
+      
+      const projectResponse = await createProject({
         variables: {
           name,
           description,
         },
-        onCompleted: (data) => {
-          console.log(data);
-          console.log('now handle file upload');
-        },
       });
+
+      const imageResponse = await uploadImage({
+        variables: {
+          file: file,
+          collection: "project",
+          collectionID: projectResponse.data.createProject.project.id,
+          fieldName: "featuredImage"
+        },
+        refetchQueries: [{ query: PROJECTS_QUERY }]
+      })
+
+      const { data } = imageResponse;
+
+      if (data) history.push('/')
+
+      setLoading(loading);
     }
   }
 
   return (
     <Container>
-      <Form onSubmit={handleSubmitForm}>
+      <Form onSubmit={handleSubmitForm} className="shadow p-3 my-4 rounded">
         <fieldset disabled={loading}>
           <Form.Group className="mb-3" controlId="formText">
             <Form.Label>Project Name</Form.Label>
@@ -94,19 +112,24 @@ export default function Dashboard() {
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Add Featured Image</Form.Label>
             <Form.Control
-              name="imageFile"
+              name="file"
               onChange={handleSetFields}
               type="file"
               required
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-          <Button variant="primary" type="button" onClick={resetFields}>
-            Reset
-          </Button>
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <Button variant="primary" type="submit" className="me-2">
+                Create Project
+              </Button>
+              <Button variant="secondary" type="button" onClick={resetFields}>
+                Reset
+              </Button>
+            </div>
+            <BackButton />
+          </div>
         </fieldset>
       </Form>
     </Container>

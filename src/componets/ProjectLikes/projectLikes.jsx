@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { UserContext } from "../../context/UserContext";
-import { useHistory } from "react-router-dom";
-import classNames from "classnames";
+import React, { useContext } from 'react';
+import { gql, useMutation, useQuery } from '@apollo/client';
+import { AiOutlineFire, AiFillFire } from 'react-icons/ai';
+import { UserContext } from '../../context/UserContext';
+import { useHistory } from 'react-router-dom';
+import classNames from 'classnames';
 
 const GET_LIKE_BY_PROJECT_ID = gql`
   query GetLikeBtPortfolioID($projectID: ID!) {
@@ -35,12 +35,12 @@ export default function ProjectLikes({ projectID, className }) {
 
   const { error, data, loading } = useQuery(GET_LIKE_BY_PROJECT_ID, {
     variables: { projectID: projectID },
-    fetchPolicy: "network-only",
+    fetchPolicy: 'network-only',
   });
 
   const [addOneLike, { error: likesError }] = useMutation(LIKE_MUTATION, {
     refetchQueries: [
-      { query: GET_LIKE_BY_PROJECT_ID, variables: { projectID: projectID} },
+      { query: GET_LIKE_BY_PROJECT_ID, variables: { projectID: projectID } },
     ],
   });
 
@@ -51,7 +51,7 @@ export default function ProjectLikes({ projectID, className }) {
   }
 
   function handleLike() {
-    if (!user) history.push("/login");
+    if (!user) history.push('/login');
     else {
       addOneLike({
         variables: {
@@ -70,16 +70,24 @@ export default function ProjectLikes({ projectID, className }) {
   if (error || likesError) return <p>Error</p>;
 
   return (
-    <div className={classNames("d-flex justify-content-center align-items-center flex-column-reverse", className)}>
-      {checkIfLikedPost(data.likes, user?.userID) ? (
-        <AiFillHeart className="heart-icon text-dark fs-1" onClick={handleLike} />
-       
-      ) : (
-        <AiOutlineHeart className="heart-icon text-dark fs-1" onClick={handleLike} />
-   
+    <div
+      className={classNames(
+        'd-flex justify-content-center align-items-center flex-column-reverse',
+        className
       )}
-            <span className="text-dark fw-bold">{data.likes.length}</span>
-
+    >
+      {checkIfLikedPost(data.likes, user?.userID) ? (
+        <AiFillFire
+          className="heart-icon text-danger fs-1"
+          onClick={handleLike}
+        />
+      ) : (
+        <AiOutlineFire
+          className="heart-icon text-dark fs-1"
+          onClick={handleLike}
+        />
+      )}
+      <span className="text-dark fw-bold">{data.likes.length}</span>
     </div>
   );
 }

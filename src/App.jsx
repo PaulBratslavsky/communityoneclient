@@ -8,6 +8,7 @@ import { UserContext } from "./context/UserContext";
 
 import "./sass/index.scss"
 import TopNavigation from "./componets/TopNavigation/topNavigation";
+import Dashboard from './pages/dashboard';
 
 
 
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <PrivateRoute path="/details/:projectID" isAuthed={user}>
             <Details />
+          </PrivateRoute>
+          <PrivateRoute path="/dashboard" isAuthed={user}>
+            <Dashboard />
           </PrivateRoute>
           <Route path="/login">
             <Login />

@@ -7,7 +7,7 @@ export default function Avatar({ imgUrl, size = 75, firstName, lastName, showNam
   return (
     <div className={classNames("d-flex justify-content-center align-items-center flex-column", className)}>
       <Image className="avatar" src={imgUrl} roundedCircle style={styles} />
-      { showName && <p className="mt-3 fw-bold">{`${firstName} ${lastName[0]}`}</p> }
+      { showName && <p className="mt-3 fw-bold">{`${firstName && firstName} ${lastName && lastName[0]}`}</p> }
     </div>
   );
 }

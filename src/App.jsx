@@ -25,9 +25,9 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <PrivateRoute path="/details/:projectID" isAuthed={user}>
+          <Route path="/details/:projectID">
             <Details />
-          </PrivateRoute>
+          </Route>
           <PrivateRoute path="/dashboard" isAuthed={user}>
             <Dashboard />
           </PrivateRoute>

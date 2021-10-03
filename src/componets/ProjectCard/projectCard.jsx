@@ -1,17 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Card, Col, Button } from 'react-bootstrap';
-import { UserContext } from '../../context/UserContext';
 import { useHistory } from 'react-router-dom';
 import Avatar from '../Avatar/avatar';
 import ProjectLikes from '../ProjectLikes/projectLikes';
 
 export function ProjectCard({ project }) {
-  const { user } = useContext(UserContext);
   const history = useHistory();
 
   function handleDetailRedirect(projectID) {
-    if (!user) history.push('/login');
-    else history.push(`/details/${projectID}`);
+    history.push(`/details/${projectID}`);
   }
 
   return (

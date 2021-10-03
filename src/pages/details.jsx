@@ -172,9 +172,9 @@ export default function Details() {
             )}
           </div>
         </div>
-        <div className="message-area bg-dark text-white rounded mb-3 p-3">
+        {/* <div className="message-area bg-dark text-white rounded mb-3 p-3">
           messages
-        </div>
+        </div> */}
       </div>
     </Container>
   );

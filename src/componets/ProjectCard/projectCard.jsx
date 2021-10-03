@@ -11,13 +11,26 @@ export function ProjectCard({ project }) {
     history.push(`/details/${projectID}`);
   }
 
+  function checkForImageFormats(imageObject) {
+    const isLarge = imageObject.hasOwnProperty('large');
+    const isMedium = imageObject.hasOwnProperty('medium');
+    const isSmall = imageObject.hasOwnProperty('small');
+    const isThumbnail = imageObject.hasOwnProperty('thumbnail');
+
+    if ( isLarge ) return imageObject.large.url
+    if ( isMedium ) return imageObject.medium.url
+    if ( isSmall ) return imageObject.small.url
+    if ( isLarge ) return imageObject.large.url
+    if ( isThumbnail ) return imageObject.thumbnail.url
+  }
+
   return (
     <Col key={project.id}>
       <Card className="card">
       {project.featuredImage && <Card.Img
           className="card-image"
           variant="top"
-          src={project.featuredImage.formats.large.url}
+          src={checkForImageFormats(project.featuredImage.formats)}
         /> }
         
         <footer className="px-3 pt-3 d-flex justify-content-between">

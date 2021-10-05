@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
-import { gql, useMutation } from "@apollo/client";
-import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
-import { Redirect } from "react-router";
-import { UserContext } from "../../context/UserContext";
+import React, { useState, useContext } from 'react';
+import { gql, useMutation } from '@apollo/client';
+import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap';
+import { Redirect } from 'react-router';
+import { UserContext } from '../../context/UserContext';
 import BackButton from '../BackButton';
 
 const LOGIN_USER = gql`
@@ -17,17 +17,16 @@ const LOGIN_USER = gql`
   }
 `;
 
-const INITIAL_FORM_STATE = { email: "", password: "" };
-
+const INITIAL_FORM_STATE = { email: '', password: '' };
 
 export default function LoginForm() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
 
   const [LoginMutation, { error, loading }] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       if (data) {
         const { login } = data;
-        setUser({ token: login.jwt, userID: login.user.id})
+        setUser({ token: login.jwt, userID: login.user.id });
       }
     },
   });
@@ -39,7 +38,7 @@ export default function LoginForm() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (input.password !== "" && input.email !== "") {
+    if (input.password !== '' && input.email !== '') {
       LoginMutation({
         variables: {
           input: {
@@ -49,13 +48,13 @@ export default function LoginForm() {
         },
       });
     } else {
-      alert("Please complete all the fields");
+      alert('Please complete all the fields');
     }
   }
 
   if (loading) return <Spinner aniamtion="grow" />;
   if (error) return <h1>ARRGGHH !</h1>;
-  if (user) return <Redirect to="/" />
+  if (user) return <Redirect to="/" />;
 
   return (
     <Container>
@@ -85,7 +84,6 @@ export default function LoginForm() {
                 className="border-0"
               />
             </Form.Group>
-
             <Button variant="outline-secondary" type="submit" className="me-2">
               Sign In
             </Button>

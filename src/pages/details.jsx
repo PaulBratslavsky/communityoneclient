@@ -7,6 +7,7 @@ import BackButton from '../componets/BackButton';
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
 import { CgWebsite } from 'react-icons/cg';
 import { IoDocumentText } from 'react-icons/io5';
+import MessageCard from '../componets/MessageCard/messageCard';
 
 const GET_PROJECT = gql`
   query SingleProjectQuerry($id: ID!) {
@@ -172,9 +173,7 @@ export default function Details() {
             )}
           </div>
         </div>
-        {/* <div className="message-area bg-dark text-white rounded mb-3 p-3">
-          messages
-        </div> */}
+        <MessageCard />
       </div>
     </Container>
   );

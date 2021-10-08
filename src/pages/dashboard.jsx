@@ -132,7 +132,7 @@ export default function Dashboard() {
   return (
     <Container>
       <Form onSubmit={handleSubmitForm} className="shadow p-3 my-4 rounded">
-        <fieldset disabled={false}>
+        <fieldset disabled={loading}>
           <Form.Group className="mb-3" controlId="formText">
             <Form.Label>Project Name</Form.Label>
             <Form.Control

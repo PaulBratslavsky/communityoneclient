@@ -173,7 +173,7 @@ export default function Details() {
             )}
           </div>
         </div>
-        <MessageCard />
+        <MessageCard projectID={projectID} />
       </div>
     </Container>
   );

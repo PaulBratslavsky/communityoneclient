@@ -7,11 +7,11 @@ const MessagesStyled = styled.div`
   margin-bottom: 10px;
 `;
 
-export default function Messages({ messages }) {
+export default function Messages({ comments }) {
   return (
     <MessagesStyled>
-      {messages.map((message) => (
-        <Message key={message.id} message={message} />
+      {comments.map((comment) => (
+        <Message key={comment.id} comment={comment} />
       )).reverse().slice(-10)}
     </MessagesStyled>
   );

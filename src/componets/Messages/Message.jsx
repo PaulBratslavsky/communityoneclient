@@ -40,14 +40,18 @@ const MessageStyled = styled.div`
   }
 `;
 
-export default function Message({ message }) {
-  const { userName, userAvatar, date, text } = message;
+export default function Message({ comment }) {
+  console.log(comment, "WE NEED THIS")
+  const {  comment: text, created_at, author: { firstName, lastName, avatarImage: { url } } } = comment;
+  const name = `${firstName} ${lastName[0]}`
   return (
-    <MessageStyled>
-      <Avatar src={userAvatar} alt="Avatar Image" />
-      <p className="author">{userName}</p>
-      <p className="text">{text}</p>
-      <p className="date">{date}</p>
-    </MessageStyled>
+    <div>
+      <MessageStyled>
+        <Avatar src={url} alt={name} />
+        <p className="author">{name}</p>
+        <p className="text">{text}</p>
+        <p className="date">{new Date(created_at).toLocaleDateString()}</p>
+      </MessageStyled>
+    </div>
   );
 }

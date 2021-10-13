@@ -6,54 +6,6 @@ import { UserContext } from '../../context/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
-const tempImage =
-  'https://coderthemes.com/ubold/layouts/assets/images/users/user-2.jpg';
-
-// const data = [
-//   {
-//     id: 1,
-//     userName: 'Paul',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: "Hey, what's up.  Portfolio looks great!",
-//   },
-//   {
-//     id: 2,
-//     userName: 'Bob',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: 'Wow, thanks!',
-//   },
-//   {
-//     id: 3,
-//     userName: 'Jena',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: 'Yeah, you are doing great!',
-//   },
-//   {
-//     id: 4,
-//     userName: 'Paul',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: "Hey, what's up.  Portfolio looks great!",
-//   },
-//   {
-//     id: 5,
-//     userName: 'Bob',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: 'Wow, thanks!',
-//   },
-//   {
-//     id: 6,
-//     userName: 'Jena',
-//     userAvatar: tempImage,
-//     date: 'Wed Oct 06 2021',
-//     text: 'Yeah, you are doing great!',
-//   },
-// ];
-
 const COMMENTS_QUERY_BY_PROJECT = gql`
   query COMMENTS_QUERY_BY_PROJECT($id: ID!) {
     comments(where: { project: { id: $id } }) {

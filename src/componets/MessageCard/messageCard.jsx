@@ -83,9 +83,7 @@ export default function MessageCard({ projectID }) {
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  function sendMessage(val) {
-    console.log(val, 'we want to send this data');
-  }
+  function sendMessage() {}
 
   const { comments } = data;
 

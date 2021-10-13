@@ -41,7 +41,6 @@ const MessageStyled = styled.div`
 `;
 
 export default function Message({ comment }) {
-  console.log(comment, "WE NEED THIS")
   const {  comment: text, created_at, author: { firstName, lastName, avatarImage: { url } } } = comment;
   const name = `${firstName} ${lastName[0]}`
   return (

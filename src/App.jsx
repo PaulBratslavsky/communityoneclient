@@ -23,14 +23,15 @@ function PrivateRoute({ isAuthed, children, ...rest }) {
 
 function App() {
   const { user } = useContext(UserContext);
-  const { timeout } = useTimeout(10)
+  const { timeout, resetInterval } = useTimeout(10)
 
-  console.log(timeout, "hehe")
+  console.log(timeout, resetInterval, "hehe")
 
   return (
     <div className="main">
       <TopNavigation />
       { timeout ? <h1> loged in</h1> : <h1>logoout</h1>}
+      { resetInterval && <button onClick={resetInterval}>reset</button> }
       <Switch>
           <Route exact path="/">
             <Home />

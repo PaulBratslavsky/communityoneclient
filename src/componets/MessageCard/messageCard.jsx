@@ -16,8 +16,6 @@ const COMMENT_MUTATION = gql`
   }
 `;
 
-const somethign =""
-
 
 const COMMENTS_QUERY_BY_PROJECT = gql`
   query COMMENTS_QUERY_BY_PROJECT($id: ID!) {
@@ -51,8 +49,6 @@ export default function MessageCard({ projectID }) {
   if (error) return `Error! ${error.message}`;
 
   function sendMessage(message) {
-    console.log(message);
-    alert('This means we fired submit');
     createComment({
       variables: {
         input: {

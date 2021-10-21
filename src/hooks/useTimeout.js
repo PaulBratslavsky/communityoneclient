@@ -68,7 +68,7 @@ function idleTimer(timeout, setTimeout, user) {
 }
 
 export default function useTimeout(time) {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [timeout, setTimeout] = useState(false);
   const [timerFunc, setTimerFunc] = useState(null);
 
@@ -76,7 +76,7 @@ export default function useTimeout(time) {
     const timer = idleTimer(time, setTimeout, user);
     setTimerFunc(timer);
     return () => timer?.cleanUp();
-  }, [time, user, setUser]);
+  }, [time, user]);
 
   return {
     timeout,

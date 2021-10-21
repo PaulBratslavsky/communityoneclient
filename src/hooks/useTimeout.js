@@ -1,15 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
-import { useApolloClient } from '@apollo/client';
 import { UserContext } from '../context/UserContext';
 
 function idleTimer(timeout, setTimeout, user) {
   if (user === null) {
     localStorage.clear();
-    setTimeout(true);
-    return {
-      cleanUp: () => {},
-      startInterval: () => {},
-    };
+    setTimeout(false);
+    return null;
   }
 
   setTimeout(false);
@@ -73,18 +69,18 @@ function idleTimer(timeout, setTimeout, user) {
 
 export default function useTimeout(time) {
   const { user, setUser } = useContext(UserContext);
-  const client = useApolloClient();
-  const [timeout, setTimeout] = useState(true);
+  const [timeout, setTimeout] = useState(false);
   const [timerFunc, setTimerFunc] = useState(null);
 
   useEffect(() => {
-    const timer = idleTimer(time, setTimeout, user, setUser, client);
+    const timer = idleTimer(time, setTimeout, user);
     setTimerFunc(timer);
     return () => timer?.cleanUp();
-  }, [time, user, setUser, client]);
+  }, [time, user, setUser]);
 
   return {
     timeout,
+    setTimeout,
     resetInterval: timerFunc?.resetInterval,
   };
 }

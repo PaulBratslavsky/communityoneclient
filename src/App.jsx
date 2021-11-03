@@ -9,6 +9,7 @@ import { UserContext } from "./context/UserContext";
 import "./sass/index.scss"
 import TopNavigation from "./componets/TopNavigation/topNavigation";
 import Dashboard from './pages/dashboard';
+import ForgotPassword from './pages/forgotPassword';
 
 
 
@@ -33,6 +34,9 @@ function App() {
           </PrivateRoute>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/forgotPassword">
+            <ForgotPassword />
           </Route>
           <Route path="*">
             <h1>Create 404 Page here</h1>

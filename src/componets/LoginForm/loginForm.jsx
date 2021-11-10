@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
-import { gql, useMutation } from '@apollo/client';
-import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap';
-import { Redirect } from 'react-router';
-import { UserContext } from '../../context/UserContext';
-import BackButton from '../BackButton';
+import React, { useState, useContext } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Redirect, Link } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import BackButton from "../BackButton";
 
 const LOGIN_USER = gql`
   mutation LoginMutation($input: UsersPermissionsLoginInput!) {
@@ -17,7 +17,7 @@ const LOGIN_USER = gql`
   }
 `;
 
-const INITIAL_FORM_STATE = { email: '', password: '' };
+const INITIAL_FORM_STATE = { email: "", password: "" };
 
 export default function LoginForm() {
   const { user, setUser } = useContext(UserContext);
@@ -38,7 +38,7 @@ export default function LoginForm() {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (input.password !== '' && input.email !== '') {
+    if (input.password !== "" && input.email !== "") {
       LoginMutation({
         variables: {
           input: {
@@ -48,7 +48,7 @@ export default function LoginForm() {
         },
       });
     } else {
-      alert('Please complete all the fields');
+      alert("Please complete all the fields");
     }
   }
 
@@ -87,6 +87,11 @@ export default function LoginForm() {
             <Button variant="outline-secondary" type="submit" className="me-2">
               Sign In
             </Button>
+
+            <Link className="text-light" to="/forgot-password">
+              Forgot Password
+            </Link>
+
             <BackButton />
           </Form>
         </Col>

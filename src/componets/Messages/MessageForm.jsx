@@ -58,8 +58,6 @@ export default function MessageForm({ callback }) {
     }
   }
 
-  console.log(message, "heello")
-
   return (
     <MessageFormStyled>
       <form onSubmit={handleSubmit}>

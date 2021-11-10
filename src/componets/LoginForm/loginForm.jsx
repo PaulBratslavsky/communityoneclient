@@ -88,7 +88,7 @@ export default function LoginForm() {
               Sign In
             </Button>
 
-            <Link className="text-light" to="/forgotPassword">
+            <Link className="text-light" to="/forgot-password">
               Forgot Password
             </Link>
 

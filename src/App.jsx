@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import Home from "./pages/home";
 import Details from "./pages/details";
+import Blog from "./pages/blog";
 import Login from "./pages/login";
 import { UserContext } from "./context/UserContext";
 
@@ -49,6 +50,9 @@ function App() {
         </Route>
         <Route path="/reset-password/:code">
           <ResetPassword />
+        </Route>
+        <Route path="/blog" >
+          <Blog />
         </Route>
         <Route path="*">
           <h1>Create 404 Page here</h1>

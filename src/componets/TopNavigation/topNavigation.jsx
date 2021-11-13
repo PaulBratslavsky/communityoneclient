@@ -27,6 +27,9 @@ export default function TopNavigation() {
           <LinkContainer to="/" exact>
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
+          <LinkContainer to="/blog" exact>
+            <Nav.Link>Blog</Nav.Link>
+          </LinkContainer>
           {!user && (
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>

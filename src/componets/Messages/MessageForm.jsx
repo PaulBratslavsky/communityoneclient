@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const MessageFormStyled = styled.div`
   margin-top: 1rem;
@@ -39,22 +39,21 @@ const MessageFormStyled = styled.div`
 
     button:disabled,
     button[disabled] {
-      background-color: #EBEBEB;
+      background-color: #ebebeb;
       color: #666666;
     }
   }
 `;
 
 export default function MessageForm({ callback }) {
-  
-  const [message, setMessage] = React.useState('');
+  const [message, setMessage] = React.useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (message) {
       callback(message);
-      setMessage('');
+      setMessage("");
     }
   }
 

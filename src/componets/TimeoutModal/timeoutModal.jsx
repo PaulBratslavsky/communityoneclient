@@ -1,38 +1,42 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { UserContext } from '../../context/UserContext';
-import { useApolloClient } from '@apollo/client';
-import { useHistory } from 'react-router';
+import { useState, useEffect, useContext, useCallback } from "react";
+import { Modal, Button } from "react-bootstrap";
+import { UserContext } from "../../context/UserContext";
+import { useApolloClient } from "@apollo/client";
+import { useHistory } from "react-router";
 
 const INITIAL_START = 20;
-export default function TimeoutModal({ timeout, setTimeout, resetInterval }) {
+export default function TimeoutModal({
+  idleTimeout,
+  setIdleTimeout,
+  resetInterval,
+}) {
   const [show, setShow] = useState(false);
   const [seconds, setSeconds] = useState(INITIAL_START);
-  const { setUser } = useContext(UserContext)
-  const history = useHistory()
+  const { setUser } = useContext(UserContext);
+  const history = useHistory();
   const client = useApolloClient();
 
   useEffect(() => {
-    setShow(timeout);
-  }, [timeout, seconds]);
+    setShow(idleTimeout);
+  }, [idleTimeout, seconds]);
 
   const handleClose = useCallback(() => {
     setSeconds(INITIAL_START);
     setShow(false);
-    setTimeout(false);
+    setIdleTimeout(false);
     localStorage.clear();
     setUser(null);
     client.clearStore();
-    history.push('/login')
-  },[setTimeout, history, client, setUser]);
+    history.push("/login");
+  }, [setIdleTimeout, history, client, setUser]);
 
   useEffect(() => {
     let timer = null;
-    if (timeout) {
+    if (idleTimeout) {
       timer = setInterval(() => {
         setSeconds((prevState) => prevState - 1);
         if (seconds === 1) {
-          handleClose()
+          handleClose();
         }
       }, 1000);
     } else {
@@ -40,9 +44,8 @@ export default function TimeoutModal({ timeout, setTimeout, resetInterval }) {
     }
 
     return () => clearTimeout(timer);
-  }, [timeout, handleClose, setSeconds, seconds]);
+  }, [idleTimeout, handleClose, setSeconds, seconds]);
 
- 
   const handleReset = () => {
     resetInterval();
     setSeconds(INITIAL_START);

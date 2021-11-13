@@ -26,7 +26,7 @@ function PrivateRoute({ isAuthed, children, ...rest }) {
 
 function App() {
   const { user } = useContext(UserContext);
-  const { timeout, setTimeout, resetInterval } = useTimeout(10);
+  const { idleTimeout, setIdleTimeout, resetInterval } = useTimeout(10);
 
   return (
     <div className="main">
@@ -55,8 +55,8 @@ function App() {
         </Route>
       </Switch>
       <TimeoutModal
-        timeout={timeout}
-        setTimeout={setTimeout}
+        idleTimeout={idleTimeout}
+        setIdleTimeout={setIdleTimeout}
         resetInterval={resetInterval}
       />
     </div>

@@ -56,14 +56,14 @@ export default function TimeoutModal({
     <>
       <Modal show={show} onHide={handleReset} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>WARNING</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {seconds}Woohoo, you're reading this text in a modal!
+          {`You will be logged off in ${seconds} seconds!`}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Log off 
           </Button>
           <Button variant="primary" onClick={handleReset}>
             Still Working

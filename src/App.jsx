@@ -51,7 +51,7 @@ function App() {
         <Route path="/reset-password/:code">
           <ResetPassword />
         </Route>
-        <Route path="/blog" >
+        <Route path="/blog">
           <Blog />
         </Route>
         <Route path="*">

@@ -27,7 +27,7 @@ function PrivateRoute({ isAuthed, children, ...rest }) {
 
 function App() {
   const { user } = useContext(UserContext);
-  const { idleTimeout, setIdleTimeout, resetInterval } = useTimeout(10);
+  const { idleTimeout, setIdleTimeout, resetInterval } = useTimeout(20000);
 
   return (
     <div className="main">
@@ -51,7 +51,7 @@ function App() {
         <Route path="/reset-password/:code">
           <ResetPassword />
         </Route>
-        <Route path="/blog" >
+        <Route path="/blog">
           <Blog />
         </Route>
         <Route path="*">

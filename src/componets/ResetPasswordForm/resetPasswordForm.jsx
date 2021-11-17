@@ -5,34 +5,34 @@ import { Redirect } from "react-router-dom";
 import BackButton from "../BackButton";
 
 const RESET_PASSWORD_MUTATION = gql`
- mutation RESET_PASSWORD_MUTATION(
-  $password: String!
-  $passwordConfirmation: String!
-  $code: String!
-) {
-  resetPassword(
-    password: $password
-    passwordConfirmation: $passwordConfirmation
-    code: $code
+  mutation RESET_PASSWORD_MUTATION(
+    $password: String!
+    $passwordConfirmation: String!
+    $code: String!
   ) {
-    user {
-      id
+    resetPassword(
+      password: $password
+      passwordConfirmation: $passwordConfirmation
+      code: $code
+    ) {
+      user {
+        id
+      }
     }
   }
-}
 `;
 
 const INITIAL_FORM_STATE = { password: "", passwordConfirmation: "" };
 
 export default function ResetPasswordForm({ code }) {
-
-  const [ResetPasswordMutation, { error, loading, data }] = useMutation(RESET_PASSWORD_MUTATION);
+  const [ResetPasswordMutation, { error, loading, data }] = useMutation(
+    RESET_PASSWORD_MUTATION
+  );
 
   const [input, setInput] = useState(INITIAL_FORM_STATE);
   const [formError, setFormError] = useState(null);
 
   function handleInputChange(event) {
-    console.log(event.target.name,  event.target.value, "INPUT");
     setInput({ ...input, [event.target.name]: event.target.value });
   }
 
@@ -44,13 +44,12 @@ export default function ResetPasswordForm({ code }) {
           variables: {
             password: input.password,
             passwordConfirmation: input.passwordConfirmation,
-            code
-          }
-        })
+            code,
+          },
+        });
       } else {
         setFormError("Passwords do not match");
       }
-     
     } else {
       setFormError("Please complete all the fields");
     }
@@ -65,7 +64,6 @@ export default function ResetPasswordForm({ code }) {
       <Row className="justify-content-md-center align-items-center text-white">
         <Col md={5}>
           <Form onSubmit={handleFormSubmit}>
-            
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
@@ -88,7 +86,7 @@ export default function ResetPasswordForm({ code }) {
                 className="border-0"
               />
             </Form.Group>
-            { (formError || error) && <p>{formError || error}</p> }
+            {(formError || error) && <p>{formError || error}</p>}
             <Button variant="outline-secondary" type="submit" className="me-2">
               Change Password
             </Button>

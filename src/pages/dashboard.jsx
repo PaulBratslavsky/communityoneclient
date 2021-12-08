@@ -6,6 +6,76 @@ import BackButton from "../componets/BackButton";
 import { useHistory } from "react-router-dom";
 import { PROJECTS_QUERY } from "../apollo/queries/projectsQuery";
 import TwoColumns from "../componets/TwoColumns/twoColumns";
+import TableColumn from "../componets/Table/tableColumn";
+import Table from "../componets/Table/table";
+
+const bugData = [
+  {
+    id: 534,
+    title: 'Adminto Admin v1',
+    startDate: '01/01/2017',
+    dueDate: '01/01/2017',
+    status: 'released',
+    assign: 'Coderthemes'
+  },
+  {
+    id: 345,
+    title: 'Database Table',
+    startDate: '01/03/2019',
+    dueDate: '01/01/2021',
+    status: 'waiting',
+    assign: 'CodeMasters'
+  },
+  {
+    id: 124,
+    title: 'Checkout Page',
+    startDate: '01/01/2020',
+    dueDate: '01/01/2021',
+    status: 'in progress',
+    assign: 'Paul'
+  },
+ 
+]
+
+
+const userData = [
+  {
+    userID: 15245,
+    userName: "Paul",
+    email: "paul@email.com",
+    phone: "123456789",
+  },
+  {
+    userID: 2435234,
+    userName: "Bob",
+    email: "bob@email.com",
+    phone: "123456789",
+  },
+]
+
+const recipiesData = [
+  {
+    recID: 3256,
+    recName: "Recipe 1",
+    recDescription: "This is a description",
+  },
+  {
+    recID: 3256,
+    recName: "Recipe 2",
+    recDescription: "This is a description 2",
+  }
+];
+const carData = [
+  {
+    uniqID: 15245,
+    carModel: "toyota",
+  },
+  {
+    uniqID: 2435234,
+    carModel: "mazda",
+  },
+]
+
 const INITIAL_FORM_STATE = {
   name: "",
   description: "",
@@ -128,8 +198,32 @@ export default function Dashboard() {
       setLoading(loading);
     }
   }
+
+  /**
+   * id: 534,
+    title: 'Adminto Admin v1',
+    startDate: '01/01/2017',
+    dueDate: '01/01/2017',
+    status: 'released',
+    assign: "Paul"
+   */
+
   return (
     <Container>
+      <div>
+        <Table
+          sourceData={bugData}
+        >
+          <TableColumn source="id" label="Bug ID" />
+          <TableColumn source="title" label="Title" />
+          <TableColumn source="startDate" label="Start Date" />
+          <TableColumn source="dueDate" label="Due Date" />
+          <TableColumn source="status" label="Status" />
+          <TableColumn source="assign" label="Assign" />
+        </Table>
+      </div>
+ 
+ 
       <TwoColumns leftSize={"2fr"} rightSize={"1fr"}>
         <Form onSubmit={handleSubmitForm} className="shadow p-3 my-4 rounded">
           <fieldset disabled={loading}>

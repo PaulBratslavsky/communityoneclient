@@ -2,10 +2,29 @@ import styled from "styled-components";
 import TableRow from './tableRow';
 
 const TableStyled = styled.table`
-  background: red;
-  color: white;
+  display: table;
+  width: 100%;
+  color: #adb5bd;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 1px;
+  margin-bottom: 1.5rem;
+
+  thead {
+    vertical-align: middle;
+  }
+
+  td,
   th {
-    padding: 10px;
+    padding: 0.85rem;
+    white-space: nowrap;
+    
+  }
+
+  tr {
+    display: table-row;
+    vertical-align: bottom;
+    border-bottom: 1px solid #3a4250;
   }
 `;
 
@@ -28,3 +47,32 @@ export default function Table({ children: columns, sourceData }) {
     </TableStyled>
   );
 }
+
+/*
+
+display: table;
+  width: 100%;
+  color: #adb5bd;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 1px;
+  margin-bottom: 1.5rem;
+
+  thead {
+    vertical-align: middle;
+  }
+
+  td,
+  th {
+    padding: 0.85rem;
+    white-space: nowrap;
+    
+  }
+
+  tr {
+    display: table-row;
+    vertical-align: bottom;
+    border-bottom: 1px solid #3a4250;
+  }
+
+  */

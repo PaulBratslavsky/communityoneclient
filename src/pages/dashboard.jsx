@@ -38,44 +38,6 @@ const bugData = [
 ]
 
 
-const userData = [
-  {
-    userID: 15245,
-    userName: "Paul",
-    email: "paul@email.com",
-    phone: "123456789",
-  },
-  {
-    userID: 2435234,
-    userName: "Bob",
-    email: "bob@email.com",
-    phone: "123456789",
-  },
-]
-
-const recipiesData = [
-  {
-    recID: 3256,
-    recName: "Recipe 1",
-    recDescription: "This is a description",
-  },
-  {
-    recID: 3256,
-    recName: "Recipe 2",
-    recDescription: "This is a description 2",
-  }
-];
-const carData = [
-  {
-    uniqID: 15245,
-    carModel: "toyota",
-  },
-  {
-    uniqID: 2435234,
-    carModel: "mazda",
-  },
-]
-
 const INITIAL_FORM_STATE = {
   name: "",
   description: "",

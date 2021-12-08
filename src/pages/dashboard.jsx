@@ -7,8 +7,6 @@ import { useHistory } from "react-router-dom";
 import { PROJECTS_QUERY } from "../apollo/queries/projectsQuery";
 import TwoColumns from "../componets/TwoColumns/twoColumns";
 
-const unusedvar = "some text";
-
 const INITIAL_FORM_STATE = {
   name: "",
   description: "",

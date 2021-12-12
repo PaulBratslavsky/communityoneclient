@@ -36,7 +36,7 @@ export function ProjectCard({ project }) {
         <footer className="px-3 pt-3 d-flex justify-content-between">
           {project.developer && (
             <Avatar
-              imgUrl={project.developer.avatarImage.url}
+              imgUrl={project.develope?.avatarImage.url}
               firstName={project.developer.firstName}
               lastName={project.developer.lastName}
             />

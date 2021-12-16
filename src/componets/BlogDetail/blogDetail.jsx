@@ -42,6 +42,8 @@ const POST_QUERY = gql`
 export default function PostDetail() {
   // get post id from url
   const { postID } = useParams();
+  console.log(postID, "WHY IS THIS NOT WORKING");
+  
 
   // get data from graph ql api
   const { data, loading, error } = useQuery(POST_QUERY, {
@@ -57,6 +59,8 @@ export default function PostDetail() {
   // render post detail
 
   return (
+    <>
+    argh
     <PostDetailStyled>
       {featuredImage && (
         <img src={featuredImage.formats.thumbnail.url} alt={title} />
@@ -64,5 +68,6 @@ export default function PostDetail() {
       <ReactMarkdown>{content}</ReactMarkdown>
       <span>author: {`${author.firstName} ${author.lastName[0]}`}</span>
     </PostDetailStyled>
+    </>
   );
 }

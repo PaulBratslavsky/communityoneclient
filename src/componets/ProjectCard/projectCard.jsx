@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card, Col, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '../Avatar/avatar';
 import ProjectLikes from '../ProjectLikes/projectLikes';
 
 export function ProjectCard({ project }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleDetailRedirect(projectID) {
-    history.push(`/details/${projectID}`);
+    navigate(`/details/${projectID}`);
   }
 
   function checkForImageFormats(imageObject) {

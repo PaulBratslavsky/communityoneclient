@@ -34,7 +34,7 @@ export default function BlogList() {
       {data.posts.map((post) => {
         return (
           <div key={post.id}>
-            <Link to={`/blog/${post.id}`}>{post.title}</Link>
+            <Link to={`${post.id}`}>{post.title}</Link>
           </div>
         );
       })}

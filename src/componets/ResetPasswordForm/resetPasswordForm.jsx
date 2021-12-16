@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import BackButton from "../BackButton";
 
 const RESET_PASSWORD_MUTATION = gql`
@@ -57,7 +57,7 @@ export default function ResetPasswordForm({ code }) {
 
   if (loading) return <Spinner aniamtion="grow" />;
   if (error) return <h1>ARRGGHH !</h1>;
-  if (data) return <Redirect to="/login" />;
+  if (data) return <Navigate to="/login" />;
 
   return (
     <Container>

@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import ReactMarkdown from "react-markdown";
@@ -6,16 +5,26 @@ import styled from "styled-components";
 
 const PostDetailStyled = styled.div`
   h1 {
-    color: black;
-    padding: 1rem;
+    color: #7740d9;
+    font-weight: bold;
+    font-size: 3rem;
   }
 
   h2 {
-    color: grey;
+    color: #8454d6;
   }
 
   p {
-    color: grey;
+    color: #070707;
+    font-size: 1.4rem;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
   }
 `;
 
@@ -50,12 +59,10 @@ export default function PostDetail() {
   if (error) return <p>Error: {error.message}</p>;
 
   const { featuredImage, title, content, author } = data.post;
-
+  console.log(featuredImage);
   return (
     <PostDetailStyled>
-      {featuredImage && (
-        <img src={featuredImage.formats.thumbnail.url} alt={title} />
-      )}
+      <h1>{title}</h1>
       <ReactMarkdown>{content}</ReactMarkdown>
       <span>author: {`${author.firstName} ${author.lastName[0]}`}</span>
     </PostDetailStyled>

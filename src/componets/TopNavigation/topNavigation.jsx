@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import { useApolloClient } from "@apollo/client";
 import UserAvatar from "../UserAvatar/userAvatar";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 export default function TopNavigation() {
   const { user, setUser } = useContext(UserContext);
@@ -19,27 +19,42 @@ export default function TopNavigation() {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Link to="/">
+        <NavLink to="/">
           <Navbar.Brand>Dev Hunt</Navbar.Brand>
-        </Link>
+        </NavLink>
         <Nav className="me-auto">
-          <Link to="/">
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/"
+          >
             <span>Home</span>
-          </Link>
-          <Link to="/blog">
+          </NavLink>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/developers"
+          >
+            <span>Developers</span>
+          </NavLink>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/blog"
+          >
             <span>Blog</span>
-          </Link>
+          </NavLink>
           {!user && (
-            <Link to="/login">
+            <NavLink
+              className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+              to="/login"
+            >
               <span>Login</span>
-            </Link>
+            </NavLink>
           )}
         </Nav>
         {user && (
           <div className="d-flex">
-            <Link to="/dashboard">
+            <NavLink to="/dashboard">
               <UserAvatar size={30} />
-            </Link>
+            </NavLink>
             <Button
               variant="primary"
               size="sm"

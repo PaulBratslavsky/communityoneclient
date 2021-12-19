@@ -43,6 +43,14 @@ function PrivateRoute({ children, auth }) {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/developers"
+          element={
+            <PrivateRoute auth={user}>
+              <h1>Developers Section Comming Soon</h1>
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <TimeoutModal
         idleTimeout={idleTimeout}

@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client';
 import { Container, Image, Spinner, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Avatar from '../componets/Avatar/avatar';
-import BackButton from '../componets/BackButton';
+import BackButton from '../componets/BackButton/backButton';
 // import ProjectLikes from "../componets/ProjectLikes/projectLikes";
 import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
 import { CgWebsite } from 'react-icons/cg';

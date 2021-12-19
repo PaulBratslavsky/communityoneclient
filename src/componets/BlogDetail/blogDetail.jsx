@@ -58,8 +58,8 @@ export default function PostDetail() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const { featuredImage, title, content, author } = data.post;
-  console.log(featuredImage);
+  const { title, content, author } = data.post;
+
   return (
     <PostDetailStyled>
       <h1>{title}</h1>

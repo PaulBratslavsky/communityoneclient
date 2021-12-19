@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import Home from "./pages/home";
 import Details from "./pages/details";
@@ -16,48 +16,42 @@ import ResetPassword from "./pages/resetPassword";
 import useTimeout from "./hooks/useTimeout";
 import TimeoutModal from "./componets/TimeoutModal/timeoutModal";
 
-function PrivateRoute({ isAuthed, children, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={() => (isAuthed ? children : <Redirect to="/login" />)}
-    />
-  );
-}
-
 function App() {
   const { user } = useContext(UserContext);
   const { idleTimeout, setIdleTimeout, resetInterval } = useTimeout(20000);
 
+
+function PrivateRoute({ children, auth }) {
+  return auth ? children : <Navigate to="/login" />;
+}
   return (
     <div className="main">
       <TopNavigation />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/details/:projectID">
-          <Details />
-        </Route>
-        <PrivateRoute path="/dashboard" isAuthed={user}>
-          <Dashboard />
-        </PrivateRoute>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/forgot-password">
-          <ForgotPassword />
-        </Route>
-        <Route path="/reset-password/:code">
-          <ResetPassword />
-        </Route>
-        <Route path="/blog">
-          <Blog />
-        </Route>
-        <Route path="*">
-          <h1>Create 404 Page here</h1>
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/details/:projectID" element={<Details />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:code" element={<ResetPassword />} />  
+        <Route path="/blog/*" element={<Blog />} />
+        <Route path="*" element={<h1>Create 404 Page here</h1>} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute auth={user}>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/developers"
+          element={
+            <PrivateRoute auth={user}>
+              <h1>Developers Section Comming Soon</h1>
+            </PrivateRoute>
+          }
+        />
+      </Routes>
       <TimeoutModal
         idleTimeout={idleTimeout}
         setIdleTimeout={setIdleTimeout}

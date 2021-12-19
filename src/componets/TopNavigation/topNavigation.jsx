@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { UserContext } from '../../context/UserContext';
-import { useApolloClient } from '@apollo/client';
-import UserAvatar from '../UserAvatar/userAvatar';
-import { useHistory } from 'react-router';
+import React, { useContext } from "react";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { UserContext } from "../../context/UserContext";
+import { useApolloClient } from "@apollo/client";
+import UserAvatar from "../UserAvatar/userAvatar";
+import { useNavigate, NavLink } from "react-router-dom";
 
 export default function TopNavigation() {
   const { user, setUser } = useContext(UserContext);
-  const history = useHistory()
+  const navigate = useNavigate();
   const client = useApolloClient();
 
   function handleLogout() {
@@ -20,32 +19,52 @@ export default function TopNavigation() {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <LinkContainer to="/" exact>
+        <NavLink to="/">
           <Navbar.Brand>Dev Hunt</Navbar.Brand>
-        </LinkContainer>
+        </NavLink>
         <Nav className="me-auto">
-          <LinkContainer to="/" exact>
-            <Nav.Link>Home</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/blog" exact>
-            <Nav.Link>Blog</Nav.Link>
-          </LinkContainer>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/"
+          >
+            <span>Home</span>
+          </NavLink>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/developers"
+          >
+            <span>Developers</span>
+          </NavLink>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/blog"
+          >
+            <span>Blog</span>
+          </NavLink>
           {!user && (
-            <LinkContainer to="/login">
-              <Nav.Link>Login</Nav.Link>
-            </LinkContainer>
+            <NavLink
+              className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+              to="/login"
+            >
+              <span>Login</span>
+            </NavLink>
           )}
         </Nav>
         {user && (
           <div className="d-flex">
-            <LinkContainer to="/dashboard">
+            <NavLink to="/dashboard">
               <UserAvatar size={30} />
-            </LinkContainer>
-            <Button  variant="primary" size="sm" className="me-2" onClick={() => history.push('/dashboard')}> 
+            </NavLink>
+            <Button
+              variant="primary"
+              size="sm"
+              className="me-2"
+              onClick={() => navigate("/dashboard")}
+            >
               Dashboard
             </Button>
 
-            <Button  variant="secondary" size="sm"  onClick={handleLogout}> 
+            <Button variant="secondary" size="sm" onClick={handleLogout}>
               Logout
             </Button>
           </div>

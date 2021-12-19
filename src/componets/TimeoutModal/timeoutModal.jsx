@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { UserContext } from "../../context/UserContext";
 import { useApolloClient } from "@apollo/client";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const INITIAL_START = 20;
 export default function TimeoutModal({
@@ -13,7 +13,7 @@ export default function TimeoutModal({
   const [show, setShow] = useState(false);
   const [seconds, setSeconds] = useState(INITIAL_START);
   const { setUser } = useContext(UserContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const client = useApolloClient();
 
   useEffect(() => {
@@ -27,8 +27,8 @@ export default function TimeoutModal({
     localStorage.clear();
     setUser(null);
     client.clearStore();
-    history.push("/login");
-  }, [setIdleTimeout, history, client, setUser]);
+    navigate("/login");
+  }, [setIdleTimeout, navigate, client, setUser]);
 
   useEffect(() => {
     let timer = null;

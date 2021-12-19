@@ -3,7 +3,7 @@ import { Container, Button, Form, Row, Col } from "react-bootstrap";
 import useForm from "../hooks/useForm";
 import { gql, useMutation } from "@apollo/client";
 import BackButton from "../componets/BackButton";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PROJECTS_QUERY } from "../apollo/queries/projectsQuery";
 import TwoColumns from "../componets/TwoColumns/twoColumns";
 
@@ -76,7 +76,7 @@ const errorMessage = {
 };
 
 export default function Dashboard() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { fields, handleSetFields, resetFields } = useForm(INITIAL_FORM_STATE);
   const [error, setError] = useState(INITIAL_ERROR);
@@ -124,7 +124,7 @@ export default function Dashboard() {
 
       const { data } = imageResponse;
 
-      if (data) history.push("/");
+      if (data) navigate("/");
 
       setLoading(loading);
     }

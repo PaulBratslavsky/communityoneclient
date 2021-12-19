@@ -3,7 +3,7 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import Messages from '../Messages/Messages';
 import MessageForm from '../Messages/MessageForm';
 import { UserContext } from '../../context/UserContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 const COMMENT_MUTATION = gql`
@@ -37,7 +37,7 @@ const COMMENTS_QUERY_BY_PROJECT = gql`
 
 export default function MessageCard({ projectID }) {
   const { user } = useContext(UserContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { loading, error, data } = useQuery(COMMENTS_QUERY_BY_PROJECT, {
     variables: { id: projectID },
@@ -76,7 +76,7 @@ export default function MessageCard({ projectID }) {
       ) : (
         <div className="d-grid gap-2">
           <Button
-            onClick={() => history.push('/login')}
+            onClick={() => navigate('/login')}
             variant="primary"
             size="sm"
           >

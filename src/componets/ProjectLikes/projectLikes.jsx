@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { AiOutlineFire, AiFillFire } from 'react-icons/ai';
 import { UserContext } from '../../context/UserContext';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
 const GET_LIKE_BY_PROJECT_ID = gql`
@@ -31,7 +31,7 @@ const LIKE_MUTATION = gql`
 
 export default function ProjectLikes({ projectID, className }) {
   const { user } = useContext(UserContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { error, data, loading } = useQuery(GET_LIKE_BY_PROJECT_ID, {
     variables: { projectID: projectID },
@@ -51,7 +51,7 @@ export default function ProjectLikes({ projectID, className }) {
   }
 
   function handleLike() {
-    if (!user) history.push('/login');
+    if (!user) navigate('/login');
     else {
       addOneLike({
         variables: {

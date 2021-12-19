@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from "react-bootstrap"
-import { useHistory } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 export default function BackButton() {
-const route = useHistory();
+const navigate = useNavigate();
 
     return (
-        <Button variant="primary" size="md" onClick={() => route.goBack()}>
+        <Button variant="primary" size="md" onClick={() => navigate(-1)}>
             Back
         </Button>
     )

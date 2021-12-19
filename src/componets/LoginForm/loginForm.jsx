@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
-import { Redirect, Link } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import BackButton from "../BackButton";
 
@@ -54,7 +54,7 @@ export default function LoginForm() {
 
   if (loading) return <Spinner aniamtion="grow" />;
   if (error) return <h1>ARRGGHH !</h1>;
-  if (user) return <Redirect to="/" />;
+  if (user) return <Navigate to="/" />;
 
   return (
     <Container>

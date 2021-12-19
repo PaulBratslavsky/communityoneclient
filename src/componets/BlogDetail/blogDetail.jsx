@@ -40,21 +40,16 @@ const POST_QUERY = gql`
 `;
 
 export default function PostDetail() {
-  // get post id from url
   const { postID } = useParams();
 
-  // get data from graph ql api
   const { data, loading, error } = useQuery(POST_QUERY, {
     variables: { postID },
   });
 
-  // check if data is loading or has errors
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const { featuredImage, title, content, author } = data.post;
-
-  // render post detail
 
   return (
     <PostDetailStyled>

@@ -5,7 +5,8 @@ import { gql, useMutation } from "@apollo/client";
 import BackButton from "../componets/BackButton";
 import { useNavigate } from "react-router-dom";
 import { PROJECTS_QUERY } from "../apollo/queries/projectsQuery";
-import TwoColumns from "../componets/TwoColumns/twoColumns";
+import Pane from '../componets/Pane/pane';
+import MarkdownEditor from '../componets/MarkdownEditor/markdownEditor';
 
 const INITIAL_FORM_STATE = {
   name: "",
@@ -131,7 +132,6 @@ export default function Dashboard() {
   }
   return (
     <Container>
-      <TwoColumns leftSize={"2fr"} rightSize={"1fr"}>
         <Form onSubmit={handleSubmitForm} className="shadow p-3 my-4 rounded">
           <fieldset disabled={loading}>
             <Form.Group className="mb-3" controlId="formText">
@@ -222,8 +222,11 @@ export default function Dashboard() {
             </div>
           </fieldset>
         </Form>
-        <h1>this will be col 2</h1>
-      </TwoColumns>
+        <Pane>
+          <h2>Work in progress.</h2>
+          <p>Working on being able to post markdown blog to strapi.</p>
+          <MarkdownEditor />
+        </Pane>
     </Container>
   );
 }

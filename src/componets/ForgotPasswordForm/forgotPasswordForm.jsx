@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
-import BackButton from "../BackButton";
+import BackButton from "../BackButton/backButton";
 
 const FORGOT_PASSWORD_MUTATION = gql`
   mutation FORGOT_PASSWORD_MUTATION($email: String!) {

@@ -9,7 +9,6 @@ const TwoColumnsStyled = styled.div`
   grid-template-columns: ${({ left, right }) =>
     left && right ? `${left} ${right}` : "1fr 3fr"};
   grid-gap: 1rem;
-  padding: 1rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

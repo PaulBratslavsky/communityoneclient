@@ -4,10 +4,11 @@ import BlogList from "../componets/BlogList/blogList";
 import { Route, Routes } from "react-router-dom";
 import PostDetail from "../componets/BlogDetail/blogDetail";
 import Pane from "../componets/Pane/pane";
+import { Container } from 'react-bootstrap';
 
 export default function Blog() {
   return (
-    <div>
+    <Container>
       <TwoColumns>
         <Pane>
           <BlogList />
@@ -16,6 +17,6 @@ export default function Blog() {
           <Route path=":postID" element={<PostDetail />} />
         </Routes>
       </TwoColumns>
-    </div>
+    </Container>
   );
 }

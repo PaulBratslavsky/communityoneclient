@@ -15,6 +15,7 @@ import ResetPassword from "./pages/resetPassword";
 
 import useTimeout from "./hooks/useTimeout";
 import TimeoutModal from "./componets/TimeoutModal/timeoutModal";
+import Developers from './pages/developers';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -47,7 +48,7 @@ function PrivateRoute({ children, auth }) {
           path="/developers"
           element={
             <PrivateRoute auth={user}>
-              <h1>Developers Section Comming Soon</h1>
+              <Developers />
             </PrivateRoute>
           }
         />

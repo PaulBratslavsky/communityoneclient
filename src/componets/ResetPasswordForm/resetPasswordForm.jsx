@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 import { Form, Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
-import BackButton from "../BackButton";
+import BackButton from "../BackButton/backButton";
 
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(

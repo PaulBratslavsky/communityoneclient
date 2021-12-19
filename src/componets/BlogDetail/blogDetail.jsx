@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 
 const PostDetailStyled = styled.div`
+  padding: 1rem;
+
   h1 {
     color: #7740d9;
     font-weight: bold;

@@ -37,6 +37,12 @@ export default function TopNavigation() {
           </NavLink>
           <NavLink
             className={(isActive) => "nav-link" + (isActive ? " active" : "")}
+            to="/bugtracker"
+          >
+            <span>Bugs</span>
+          </NavLink>
+          <NavLink
+            className={(isActive) => "nav-link" + (isActive ? " active" : "")}
             to="/blog"
           >
             <span>Blog</span>

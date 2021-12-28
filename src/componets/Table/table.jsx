@@ -1,10 +1,11 @@
+import { Children } from "react";
 import styled from "styled-components";
-import TableRow from './tableRow';
+import TableRow from "./tableRow";
 
 const TableStyled = styled.table`
   display: table;
   width: 100%;
-  color: #adb5bd;
+  color: #343a40;
   text-align: left;
   border-collapse: collapse;
   border-spacing: 1px;
@@ -12,13 +13,17 @@ const TableStyled = styled.table`
 
   thead {
     vertical-align: middle;
+    color: #7740d9;
   }
 
   td,
   th {
     padding: 0.85rem;
     white-space: nowrap;
-    
+  }
+
+  td.first-col {
+    color: #7740d9;
   }
 
   tr {
@@ -28,7 +33,9 @@ const TableStyled = styled.table`
   }
 `;
 
-export default function Table({ children: columns, sourceData }) {
+export default function Table({ children, sourceData }) {
+  const columns = Children.toArray(children);
+
   return (
     <TableStyled>
       <thead>
@@ -42,7 +49,8 @@ export default function Table({ children: columns, sourceData }) {
 
       <tbody>
         {sourceData.map((row, index) => {
-          return <TableRow row={row} columns={columns} index={index} />;  })}
+          return <TableRow row={row} columns={columns} index={index} />;
+        })}
       </tbody>
     </TableStyled>
   );

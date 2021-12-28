@@ -16,6 +16,7 @@ import ResetPassword from "./pages/resetPassword";
 import useTimeout from "./hooks/useTimeout";
 import TimeoutModal from "./componets/TimeoutModal/timeoutModal";
 import Developers from './pages/developers';
+import Bugtracker from './pages/bugtracker';
 
 function App() {
   const { user } = useContext(UserContext);
@@ -41,6 +42,14 @@ function PrivateRoute({ children, auth }) {
           element={
             <PrivateRoute auth={user}>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/bugtracker"
+          element={
+            <PrivateRoute auth={user}>
+              <Bugtracker />
             </PrivateRoute>
           }
         />

@@ -9,7 +9,6 @@ import { useQuery } from "@apollo/client";
 export default function Bugtracker({ query, variables}) {
   const [showAddIssue, setShowAddIssue] = useState(false);
   const { data, loading, error } = useQuery(query, variables);
-  console.log(variables?.variables.projectID, "projectID");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;

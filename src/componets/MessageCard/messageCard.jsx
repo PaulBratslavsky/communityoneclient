@@ -68,7 +68,7 @@ export default function MessageCard({ projectID }) {
   const { comments } = data;
 
   return (
-    <div className="message-area bg-white shadow text-white rounded mb-3 p-3">
+    <div className="message-area bg-white shadow text-white rounded p-3">
       <h3 className="text-dark">Lattest Comments</h3>
       <Messages comments={comments} />
       {user ? (

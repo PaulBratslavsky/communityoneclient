@@ -9,7 +9,6 @@ import { CgWebsite } from "react-icons/cg";
 import { IoDocumentText } from "react-icons/io5";
 import MessageCard from "../componets/MessageCard/messageCard";
 import Bugtracker from "../componets/Bugtracker/bugtracker";
-import Pane from "../componets/Pane/pane";
 
 const GET_ISSUES_BY_PROJECT_ID_QUERY = gql`
   query GET_ALL_ISSUES($projectID: ID!) {
@@ -204,15 +203,13 @@ export default function Details() {
 
         <MessageCard projectID={projectID} />
 
-        <div className="bugtracker-area mb-3">
-          <Pane>
-            <Bugtracker
-              query={GET_ISSUES_BY_PROJECT_ID_QUERY}
-              variables={{
-                variables: { projectID: projectID },
-              }}
-            />
-          </Pane>
+        <div className="bugtracker-area mb-3 p-1">
+          <Bugtracker
+            query={GET_ISSUES_BY_PROJECT_ID_QUERY}
+            variables={{
+              variables: { projectID: projectID },
+            }}
+          />
         </div>
       </div>
     </Container>

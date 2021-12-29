@@ -1,7 +1,7 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
-import { gql } from '@apollo/client'
-import Bugtracker from '../componets/Bugtracker/bugtracker';
+import React from "react";
+import { Container } from "react-bootstrap";
+import { gql } from "@apollo/client";
+import Bugtracker from "../componets/Bugtracker/bugtracker";
 
 const GET_ALL_ISSUES_QUERY = gql`
   query GET_ALL_ISSUES {
@@ -30,8 +30,8 @@ const GET_ALL_ISSUES_QUERY = gql`
 
 export default function Bugs() {
   return (
-    <Container>
+    <Container className="mt-3">
       <Bugtracker query={GET_ALL_ISSUES_QUERY} />
     </Container>
-  )
+  );
 }

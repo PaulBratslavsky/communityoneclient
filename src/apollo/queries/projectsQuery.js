@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 export const PROJECTS_QUERY = gql`
   query GetAllProjects {
-    projects(limit: 3) {
+    projects(limit: 6) {
       id
       name
       description

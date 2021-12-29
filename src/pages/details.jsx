@@ -1,13 +1,40 @@
-import { gql, useQuery } from '@apollo/client';
-import { Container, Image, Spinner, Button } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import Avatar from '../componets/Avatar/avatar';
-import BackButton from '../componets/BackButton/backButton';
+import { gql, useQuery } from "@apollo/client";
+import { Container, Image, Spinner, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import Avatar from "../componets/Avatar/avatar";
+import BackButton from "../componets/BackButton/backButton";
 // import ProjectLikes from "../componets/ProjectLikes/projectLikes";
-import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
-import { CgWebsite } from 'react-icons/cg';
-import { IoDocumentText } from 'react-icons/io5';
-import MessageCard from '../componets/MessageCard/messageCard';
+import { AiFillGithub, AiFillLinkedin, AiFillYoutube } from "react-icons/ai";
+import { CgWebsite } from "react-icons/cg";
+import { IoDocumentText } from "react-icons/io5";
+import MessageCard from "../componets/MessageCard/messageCard";
+import Bugtracker from "../componets/Bugtracker/bugtracker";
+import Pane from "../componets/Pane/pane";
+
+const GET_ISSUES_BY_PROJECT_ID_QUERY = gql`
+  query GET_ALL_ISSUES($projectID: ID!) {
+    issues(where: { project: { id: $projectID } }) {
+      id
+      isPrivate
+      created_at
+      issueBrief
+      dueDate
+      createdBy {
+        id
+        firstName
+        lastName
+      }
+      project {
+        id
+        name
+      }
+      type
+      status
+      severity
+      priority
+    }
+  }
+`;
 
 const GET_PROJECT = gql`
   query SingleProjectQuerry($id: ID!) {
@@ -71,11 +98,12 @@ export default function Details() {
             <Image
               src={featuredImage.url}
               alt="name"
-              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+              style={{ height: "100%", width: "100%", objectFit: "cover" }}
             />
           )}
         </div>
-        <div className="project-details bg-light rounded p-3 mb-3">
+
+        <div className="project-details bg-light rounded p-3">
           <div>
             <header>
               <h1>{name}</h1>
@@ -173,7 +201,19 @@ export default function Details() {
             )}
           </div>
         </div>
+
         <MessageCard projectID={projectID} />
+
+        <div className="bugtracker-area mb-3">
+          <Pane>
+            <Bugtracker
+              query={GET_ISSUES_BY_PROJECT_ID_QUERY}
+              variables={{
+                variables: { projectID: projectID },
+              }}
+            />
+          </Pane>
+        </div>
       </div>
     </Container>
   );

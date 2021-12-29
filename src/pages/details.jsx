@@ -204,15 +204,13 @@ export default function Details() {
 
         <MessageCard projectID={projectID} />
 
-        <div className="bugtracker-area mb-3">
-          <Pane>
-            <Bugtracker
-              query={GET_ISSUES_BY_PROJECT_ID_QUERY}
-              variables={{
-                variables: { projectID: projectID },
-              }}
-            />
-          </Pane>
+        <div className="bugtracker-area mb-3 p-1">
+          <Bugtracker
+            query={GET_ISSUES_BY_PROJECT_ID_QUERY}
+            variables={{
+              variables: { projectID: projectID },
+            }}
+          />
         </div>
       </div>
     </Container>

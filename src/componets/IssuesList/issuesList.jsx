@@ -1,5 +1,4 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
 import Table from "../Table/table";
 import TableColumn from "../Table/tableColumn";
 import styled from "styled-components";

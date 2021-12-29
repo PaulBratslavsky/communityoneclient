@@ -38,7 +38,7 @@ const errorMessage = {
 
 export default function AddIssue() {
   const [dueDate, setDueDate] = useState(new Date());
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false); // setLoading
   const [error, setError] = useState(INITIAL_ERROR);
 
   const {

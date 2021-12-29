@@ -36,7 +36,7 @@ const errorMessage = {
   projects: "Please Provide Proper Site URL",
 };
 
-export default function AddIssue() {
+export default function AddIssue({ projectID }) {
   const [dueDate, setDueDate] = useState(new Date());
   const [loading] = useState(false); // setLoading
   const [error, setError] = useState(INITIAL_ERROR);
@@ -107,7 +107,8 @@ export default function AddIssue() {
                 name="project"
                 aria-label="Default select example"
                 onChange={handleSetFields}
-                value={fields.project}
+                value={projectID || fields.project}
+                disabled={projectID}
               >
                 <option>Select a Project</option>
                 {data.projects.map((project) => (

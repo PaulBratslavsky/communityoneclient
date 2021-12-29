@@ -10,8 +10,6 @@ export default function Dashboard() {
           <AddProject />
         </Pane>
         <Pane>
-          <h2>Work in progress.</h2>
-          <p>Working on being able to post markdown blog to strapi.</p>
           <AddPost />
         </Pane>
     </Container>

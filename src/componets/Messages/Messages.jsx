@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Message from './Message';
 const MessagesStyled = styled.div`
-  height: 290px;
+  flex: auto;
   overflow-x: scroll;
   margin-bottom: 10px;
 `;

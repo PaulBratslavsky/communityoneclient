@@ -4,30 +4,7 @@ import Table from "../Table/table";
 import TableColumn from "../Table/tableColumn";
 import styled from "styled-components";
 
-const GET_ALL_ISSUES_QUERY = gql`
-  query GET_ALL_ISSUES {
-    issues {
-      id
-      isPrivate
-      created_at
-      issueBrief
-      dueDate
-      createdBy {
-        id
-        firstName
-        lastName
-      }
-      project {
-        id
-        name
-      }
-      type
-      status
-      severity
-      priority
-    }
-  }
-`;
+
 
 const BadgeStyled = styled.span`
   display: inline-block;
@@ -47,14 +24,8 @@ function Badge({ text, onClick }) {
   return <BadgeStyled onClick={onClick}>{text}</BadgeStyled>;
 }
 
-export default function IssuesList() {
-  const { data, loading, error } = useQuery(GET_ALL_ISSUES_QUERY);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-
-  const { issues } = data;
-
+export default function IssuesList({ issues }) {
+  
   return (
     <div>
       <Table sourceData={issues}>

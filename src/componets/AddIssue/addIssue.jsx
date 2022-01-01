@@ -1,10 +1,32 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row } from "react-bootstrap";
 import BackButton from "../BackButton/backButton";
 import useForm from "../../hooks/useForm";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import FormInput from "../FormInput/FormInput";
+import FormDatePicker from "../FormDatePicker/FormDatePicker";
+import FormSelect from "../FormSelect/FormSelect";
+
+const TYPES = [
+  { id: "BUG", value: "BUG" },
+  { id: "FEATURE", value: "FEATURE" },
+  { id: "TASK", value: "TASK" },
+];
+
+const PRIORITY = [
+  { id: "IMMEDIATE", value: "IMMEDIATE" },
+  { id: "HIGH", value: "HIGH" },
+  { id: "MEDIUM", value: "MEDIUM" },
+  { id: "LOW", value: "LOW" },
+];
+
+const SEVERITY = [
+  { id: "CRITICAL", value: "CRITICAL" },
+  { id: "MAJOR", value: "MAJOR" },
+  { id: "MODERATE", value: "MODERATE" },
+  { id: "LOW", value: "LOW" },
+];
 
 const GET_ALL_PROJECTS = gql`
   query GET_ALL_PROJECTS {
@@ -22,8 +44,9 @@ const INITIAL_FORM_STATE = {
   issueBrief: "",
   description: "",
   project: "",
-  siteUrl: "",
-  file: "",
+  type: "",
+  priority: "",
+  severity: "",
 };
 
 const INITIAL_ERROR = {
@@ -47,6 +70,8 @@ export default function AddIssue({ projectID }) {
     error: errorProjects,
   } = useQuery(GET_ALL_PROJECTS);
 
+  console.log(data?.projects, "hello");
+
   const { fields, handleSetFields, resetFields } = useForm(INITIAL_FORM_STATE);
 
   function handleSubmitForm(event) {
@@ -63,42 +88,111 @@ export default function AddIssue({ projectID }) {
   return (
     <Form onSubmit={handleSubmitForm} className="p-3">
       <fieldset disabled={loading}>
-        <Form.Group className="mb-3" controlId="formText">
-          <Form.Label>Issue Brief Description</Form.Label>
-          <Form.Control
-            name="issueBrief"
-            value={fields.issueBrief}
+        <FormInput
+          label="Issue Brief Description"
+          name="issueBrief"
+          value={fields.issueBrief}
+          onChange={handleSetFields}
+          type="text"
+          placeholder="Enter brief description"
+          required
+        />
+        <Row className="mb-3">
+          <FormSelect
+            label="Type"
+            name="type"
+            defaultOption="Select Type"
+            options={TYPES}
+            optionKey="value"
             onChange={handleSetFields}
-            type="text"
-            placeholder="Enter brief description"
-            required
+            value={fields.type}
+            error={error}
+            errorMessage={errorMessage}
           />
-        </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formTextarea">
-          <Form.Label>Full Issue Description</Form.Label>
-          <Form.Control
-            name="description"
-            value={fields.description}
-            onChange={handleSetFields}
-            as="textarea"
-            placeholder="Enter project description"
-            rows={3}
-            required
+          <FormDatePicker
+            setDate={setDueDate}
+            date={dueDate}
+            error={error}
+            errorMessage={errorMessage}
           />
-        </Form.Group>
+
+          <FormSelect
+            label="Project"
+            name="project"
+            defaultOption="Select Project"
+            options={data?.projects}
+            optionKey="name"
+            loading={loadingProjects}
+            onChange={handleSetFields}
+            value={projectID || fields.project}
+            disabled={projectID}
+            error={error || errorProjects}
+            errorMessage={errorMessage}
+          />
+          
+        </Row>
+
+        <FormInput
+          label="Full Issue Description"
+          name="description"
+          value={fields.description}
+          onChange={handleSetFields}
+          as="textarea"
+          placeholder="Enter project description"
+          rows={3}
+          required
+        />
 
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridGitHub">
-            <Form.Label>Due Date</Form.Label>
-            <DatePicker
-              selected={dueDate}
-              onChange={(date) => setDueDate(date)}
-            />
-            {error.dueDate && errorMessage.dueDate}
-          </Form.Group>
+          <FormSelect
+            label="Priority"
+            name="priority"
+            defaultOption="Select Type"
+            options={PRIORITY}
+            optionKey="value"
+            onChange={handleSetFields}
+            value={fields.priority}
+            error={error}
+            errorMessage={errorMessage}
+          />
 
-          <Form.Group as={Col} controlId="formGridLive">
+          <FormSelect
+            label="Severity"
+            name="severity"
+            defaultOption="Select Severity"
+            options={SEVERITY}
+            optionKey="value"
+            onChange={handleSetFields}
+            value={fields.severity}
+            error={error}
+            errorMessage={errorMessage}
+          />
+        </Row>
+
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <Button variant="primary" type="submit" className="me-2">
+              Add Issue
+            </Button>
+            <Button
+              variant="secondary"
+              type="button"
+              onClick={handleResetButton}
+            >
+              Reset
+            </Button>
+          </div>
+          <BackButton />
+        </div>
+      </fieldset>
+    </Form>
+  );
+}
+
+/*
+
+<Form.Group as={Col} controlId="formGridLive">
             <Form.Label>Project</Form.Label>
             {loadingProjects ? (
               <p>Loading...</p>
@@ -121,24 +215,5 @@ export default function AddIssue({ projectID }) {
             {errorProjects?.message ||
               (error.projects && errorMessage.projects)}
           </Form.Group>
-        </Row>
 
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <Button variant="primary" type="submit" className="me-2">
-              Add Issue
-            </Button>
-            <Button
-              variant="secondary"
-              type="button"
-              onClick={handleResetButton}
-            >
-              Reset
-            </Button>
-          </div>
-          <BackButton />
-        </div>
-      </fieldset>
-    </Form>
-  );
-}
+          */

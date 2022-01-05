@@ -9,31 +9,7 @@ import { CgWebsite } from "react-icons/cg";
 import { IoDocumentText } from "react-icons/io5";
 import MessageCard from "../componets/MessageCard/messageCard";
 import Bugtracker from "../componets/Bugtracker/bugtracker";
-
-const GET_ISSUES_BY_PROJECT_ID_QUERY = gql`
-  query GET_ALL_ISSUES($projectID: ID!) {
-    issues(where: { project: { id: $projectID } }) {
-      id
-      isPrivate
-      created_at
-      issueBrief
-      dueDate
-      createdBy {
-        id
-        firstName
-        lastName
-      }
-      project {
-        id
-        name
-      }
-      type
-      status
-      severity
-      priority
-    }
-  }
-`;
+import { GET_ISSUES_BY_PROJECT_ID_QUERY } from "../apollo/queries/getIssuesByProjectId";
 
 const GET_PROJECT = gql`
   query SingleProjectQuerry($id: ID!) {
@@ -207,7 +183,7 @@ export default function Details() {
           <Bugtracker
             query={GET_ISSUES_BY_PROJECT_ID_QUERY}
             variables={{
-              variables: { projectID: projectID },
+              variables: { projectID },
             }}
           />
         </div>

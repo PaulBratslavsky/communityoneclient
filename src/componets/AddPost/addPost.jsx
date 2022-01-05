@@ -42,7 +42,6 @@ export default function AddPost() {
   }
 
   if (error) return <h1>{error.message}</h1>;
-  console.log(data);
   return (
     <Form onSubmit={handleSubmitForm} className="p-3">
       <fieldset disabled={loading}>

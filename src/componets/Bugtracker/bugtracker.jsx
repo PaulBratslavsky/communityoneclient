@@ -23,7 +23,7 @@ export default function Bugtracker({ query, variables}) {
       >
         {showAddIssue ? "-" : "+"}
       </Button>
-      <Pane>{showAddIssue ? <AddIssue projectID={variables?.variables.projectID} /> : <IssuesList issues={issues}/>}</Pane>
+      <Pane>{showAddIssue ? <AddIssue projectID={variables?.variables.projectID} setShowAddIssue={setShowAddIssue} /> : <IssuesList issues={issues}/>}</Pane>
     </>
   );
 }

@@ -49,7 +49,7 @@ export default function IssuesList({ issues }) {
         <TableColumn
           source="project"
           label="Project"
-          render={(data) => <span>{data.name}</span>}
+          render={(data) => <span>{data?.name}</span>}
         />
         <TableColumn source="id" label="Issue ID" />
       </Table>

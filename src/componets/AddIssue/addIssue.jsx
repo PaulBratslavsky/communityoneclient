@@ -96,7 +96,6 @@ export default function AddIssue({ projectID, setShowAddIssue }) {
       ...fields,
       dueDate: new Date(dueDate),
       project: projectID || fields.project,
-      createdBy: "1",
     };
 
     await createIssue({

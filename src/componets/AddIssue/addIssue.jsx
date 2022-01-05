@@ -13,7 +13,7 @@ import { GET_ISSUES_BY_PROJECT_ID_QUERY } from '../../apollo/queries/getIssuesBy
 const TYPES = [
   { id: "BUG", value: "BUG" },
   { id: "FEATURE", value: "FEATURE" },
-  { id: "TASK", value: "TASK" },
+  { id: "TODO", value: "TODO" },
 ];
 
 const PRIORITY = [

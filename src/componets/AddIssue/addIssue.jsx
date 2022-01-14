@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
 import { Form, Button, Row } from "react-bootstrap";
 import BackButton from "../BackButton/backButton";
 import useForm from "../../hooks/useForm";
@@ -7,11 +7,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import FormInput from "../FormInput/FormInput";
 import FormDatePicker from "../FormDatePicker/FormDatePicker";
 import FormSelect from "../FormSelect/FormSelect";
+import { GET_ALL_ISSUES_QUERY } from "../../apollo/queries/getAllIssues";
+import { GET_ISSUES_BY_PROJECT_ID_QUERY } from '../../apollo/queries/getIssuesByProjectId';
 
 const TYPES = [
   { id: "BUG", value: "BUG" },
   { id: "FEATURE", value: "FEATURE" },
-  { id: "TASK", value: "TASK" },
+  { id: "TODO", value: "TODO" },
 ];
 
 const PRIORITY = [
@@ -33,6 +35,17 @@ const GET_ALL_PROJECTS = gql`
     projects {
       id
       name
+    }
+  }
+`;
+
+const CREATE_ISSUE_MUTATION = gql`
+  mutation CREATE_ISSUE_MUTATION($input: createIssueInput!) {
+    createIssue(input: $input) {
+      issue {
+        id
+        published_at
+      }
     }
   }
 `;
@@ -59,10 +72,14 @@ const errorMessage = {
   projects: "Please Provide Proper Site URL",
 };
 
-export default function AddIssue({ projectID }) {
+export default function AddIssue({ projectID, setShowAddIssue }) {
   const [dueDate, setDueDate] = useState(new Date());
-  const [loading] = useState(false); // setLoading
+  const [loading, { loading: loadingIssue }] = useState(false); // setLoading
   const [error, setError] = useState(INITIAL_ERROR);
+
+  const [createIssue] = useMutation(
+    CREATE_ISSUE_MUTATION
+  );
 
   const {
     data,
@@ -70,13 +87,30 @@ export default function AddIssue({ projectID }) {
     error: errorProjects,
   } = useQuery(GET_ALL_PROJECTS);
 
-  console.log(data?.projects, "hello");
-
   const { fields, handleSetFields, resetFields } = useForm(INITIAL_FORM_STATE);
 
-  function handleSubmitForm(event) {
+  async function handleSubmitForm(event) {
     event.preventDefault();
-    console.log("submit");
+
+    const dataToSend = {
+      ...fields,
+      dueDate: new Date(dueDate),
+      project: projectID || fields.project,
+    };
+
+    await createIssue({
+      variables: { input: { data: dataToSend } },
+      refetchQueries: [
+        { query: GET_ALL_ISSUES_QUERY },
+        {
+          query: GET_ISSUES_BY_PROJECT_ID_QUERY,
+          variables: { projectID: projectID || fields.project },
+        },
+      ],
+    }).then((res) => {
+      resetFields();
+      setShowAddIssue(false);
+    });
   }
 
   function handleResetButton() {
@@ -87,7 +121,7 @@ export default function AddIssue({ projectID }) {
 
   return (
     <Form onSubmit={handleSubmitForm} className="p-3">
-      <fieldset disabled={loading}>
+      <fieldset disabled={loading || loadingIssue}>
         <FormInput
           label="Issue Brief Description"
           name="issueBrief"
@@ -130,7 +164,6 @@ export default function AddIssue({ projectID }) {
             error={error || errorProjects}
             errorMessage={errorMessage}
           />
-          
         </Row>
 
         <FormInput

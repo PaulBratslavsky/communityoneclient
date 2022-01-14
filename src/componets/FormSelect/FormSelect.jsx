@@ -14,8 +14,6 @@ export default function FormSelect({
   errorMessage,
   ...rest
 }) {
-  console.log(options, "why");
-
   return (
     <Form.Group as={Col} controlId="formGridLive">
       <Form.Label>{label}</Form.Label>

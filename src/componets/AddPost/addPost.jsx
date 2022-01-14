@@ -24,7 +24,7 @@ export default function AddPost() {
   const { handleSetFields, fields } = useForm(INITIAL_FORM_STATE);
 
   const [content, setContent] = useState("");
-  const [addPost, { loading, error, data }] = useMutation(ADD_POST_MUTATION);
+  const [addPost, { loading, error }] = useMutation(ADD_POST_MUTATION);
 
   async function handleSubmitForm(event) {
     event.preventDefault();
@@ -42,7 +42,6 @@ export default function AddPost() {
   }
 
   if (error) return <h1>{error.message}</h1>;
-  console.log(data);
   return (
     <Form onSubmit={handleSubmitForm} className="p-3">
       <fieldset disabled={loading}>

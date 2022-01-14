@@ -16,17 +16,17 @@ export default function Dashboard() {
           dashboard
           <div>
             <h1>Hey welcome home!</h1>
-            <div className="links">
-              <Link to={`${path}/projects`} className="link">
+            <nav className="nav nav-tabs">
+              <Link to={`${path}/projects`} className="link nav-link">
                 Projects
               </Link>
-              <Link to={`${path}/posts`} className="link">
+              <Link to={`${path}/posts`} className="link nav-link">
                 Posts
               </Link>
-              <Link to={`${path}/issues`} className="link">
+              <Link to={`${path}/issues`} className="link nav-link">
                 Issues
               </Link>
-            </div>
+            </nav>
             <div className="tabs">
             <Routes>
               <Route path={`/projects`}  element={<AddProject />} />

@@ -38,7 +38,7 @@ function PrivateRoute({ children, auth }) {
         <Route path="/blog/*" element={<Blog />} />
         <Route path="*" element={<h1>Create 404 Page here</h1>} />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <PrivateRoute auth={user}>
               <Dashboard />

@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import TwoColumns from "../componets/TwoColumns/twoColumns";
 import AddProject from "../componets/AddProject/addProject";
 import AddPost from "../componets/AddPost/addPost";
+import ImportAssets from '../componets/ImportAssets/ImportAssets';
 
 const path = "/dashboard";
 
@@ -31,7 +32,7 @@ export default function Dashboard() {
             <Routes>
               <Route path={`/projects`}  element={<AddProject />} />
               <Route path={`/posts`}  element={<AddPost />} />
-              <Route path={`/issues`}  element={<h1>Issues</h1>} />
+              <Route path={`/issues`}  element={<ImportAssets />} />
             </Routes>
             </div>
           </div>

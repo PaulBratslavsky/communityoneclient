@@ -62,13 +62,39 @@ const analizeImports = async ({ data, type }) => {
 
 };
 
- 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      complete: function (tableData) {
+        const header = tableData.meta.fields;
+        setColumsDef(createColumsDef(header));
+        setRowData(tableData.data);
+        setLoading(false);
+      },
+    });
+  };
 
-  console.log(rowData);
+  console.log(rowData)
   return (
     <div>
-
+      <Form onSubmit={handleSubmit}>
+        <fieldset disabled={loading}>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Default file input example</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
+            <Button variant="primary" type="submit">
+              Process CSV
+            </Button>
+          </Form.Group>
+        </fieldset>
+      </Form> 
 
       <ImportAssetsUpload onSubmit={analizeImports} />
 
